@@ -101,6 +101,7 @@ class SearchBar extends Component {
     // console.log(results);
     return (
       <Search
+        fixed
         aligned='right'
         loading={isLoading}
         onResultSelect={this.handleResultSelect}

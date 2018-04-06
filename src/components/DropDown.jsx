@@ -1,25 +1,26 @@
 import React from 'react'
-import { Dropdown, Grid, Header, Image, Modal  } from 'semantic-ui-react'
+import { Dropdown, Grid, Header, Image, Modal, Icon } from 'semantic-ui-react'
 
-const DropDown = ({ logout, profile, status, onChange, open }) => {
+const DropDown = () => {
 
   let options = [
-    { key: 'user', text: 'Account', icon: 'user', onClick: onChange  },
-    { key: 'cart', text: 'Cart', icon: 'user', onClick: onChange  },
-    { key: 'sign-out', text: 'Sign Out', icon: 'sign out', onClick: logout },
+    { key: 'user', text: 'Account', icon: 'user'},
+    { key: 'List', text: 'List', icon: 'sticky note'},
+    { key: 'sign-out', text: 'Sign Out', icon: 'sign out'}
   ]
-  // <Dropdown.Menu>
-  //   <Dropdown.Item>Account</Dropdown.Item>
-  //   <Dropdown.Item>Cart</Dropdown.Item>
-  //   <Dropdown.Item>Logout</Dropdown.Item>
-  // </Dropdown.Menu>
+
   return (
-    <div>
-      <Dropdown
+    <Dropdown
+        simple
+        trigger={
+
+             <Icon name='user' />
+
+        }
         options={options}
-        pointing='top'
+        // pointing='top'
         icon={null}/>
-    </div>
+
   )
 }
 
