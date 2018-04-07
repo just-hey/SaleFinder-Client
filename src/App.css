@@ -1,5 +1,9 @@
 /* https://coolors.co/050505-1b9aaa-dddbcb-2ffc41-485665 */
 
+#allProductsList {
+  padding-top: 3.5rem;
+}
+
 .App {
   text-align: center;
 }
@@ -27,4 +31,14 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.hiddenPusher {
+  visibility: hidden;
+  height: 3rem;
+}
+
+#searchBarDeskTop {
+  margin: 3px 0;
+  width: 600px;
 }

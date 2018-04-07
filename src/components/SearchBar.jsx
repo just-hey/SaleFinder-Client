@@ -1,6 +1,7 @@
 import _ from 'lodash'
+import $ from 'jquery'
 import React, { Component } from 'react'
-import { Search, Grid, Header } from 'semantic-ui-react'
+import { Sidebar, Segment, Button, Grid, Search, Menu, Image, Icon, Header } from 'semantic-ui-react'
 
 //needs to be a dynamic AF list of products when deployed
 const source = [ { image: 'https://scene7-secure.targetimg1.com/is/image/Target/dwa_p07_i_20180401?wid=480&amp;fmt=pjpeg&amp;qlt=60',
@@ -73,13 +74,23 @@ const source = [ { image: 'https://scene7-secure.targetimg1.com/is/image/Target/
     store: 'Target' } ]
 
 class SearchBar extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   componentWillMount() {
     this.resetComponent()
+    this.setState({ visible: false })
   }
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
   handleResultSelect = (e, { result }) => this.setState({ value: result.name })
+
+  toggleVisibility = () => {
+    this.state.visible ? $('#hiddenPusher').removeClass('hiddenPusher') : $('#hiddenPusher').addClass('hiddenPusher')
+    this.setState({ visible: !this.state.visible })
+  }
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value })
@@ -88,30 +99,76 @@ class SearchBar extends Component {
 
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
       const isMatch = result => re.test(result.name)
-      console.log(source);
+      console.log('dis',this.props);
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch),
+        results: _.filter(this.props, isMatch),
       })
     }, 300)
   }
 
   render() {
-    const { isLoading, value, results } = this.state
+    const { isLoading, value, results, visible } = this.state
     // console.log(results);
     return (
-      <Search
-        fixed
-        aligned='right'
-        loading={isLoading}
-        onResultSelect={this.handleResultSelect}
-        onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
-        results={results}
-        value={value}
-        {...this.props}
-      />
+      <div>
+        <Search
+          id='searchBarDeskTop'
+          fixed='true'
+          aligned='right'
+          loading={isLoading}
+          onResultSelect={this.handleResultSelect}
+          onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
+          results={results}
+          value={value}
+          {...this.props}
+        />
+      </div>
     )
   }
 }
 
 export default SearchBar
+
+
+//
+//
+// import React, { Component } from 'react'
+// import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
+//
+// class SidebarTopOverlay extends Component {
+//   state = { visible: false }
+//
+//   toggleVisibility = () => this.setState({ visible: !this.state.visible })
+//
+//   render() {
+//     const { visible } = this.state
+//     return (
+//       <div>
+//         <Button onClick={this.toggleVisibility}>Toggle Visibility</Button>
+//         <Sidebar.Pushable as={Segment}>
+//           <Sidebar as={Menu} animation='overlay' direction='top' visible={visible} inverted>
+//             <Menu.Item name='search'>
+//               <Search
+//                 size='small'
+//                 id='searchBarDeskTop'
+//                 fixed='true'
+//                 aligned='right'
+//                 loading={isLoading}
+//                 onResultSelect={this.handleResultSelect}
+//                 onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
+//                 results={results}
+//                 value={value}
+//                 {...this.props}
+//               />
+//             </Menu.Item>
+//           </Sidebar>
+//           <Sidebar.Pusher>
+//           </Sidebar.Pusher>
+//         </Sidebar.Pushable>
+//       </div>
+//     )
+//   }
+// }
+//
+// export default SidebarTopOverlay
