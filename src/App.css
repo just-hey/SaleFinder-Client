@@ -8,6 +8,16 @@
   text-align: center;
 }
 
+#banner {
+  background-image: url(http://www.oliverwyman.com/content/dam/oliver-wyman/v2/publications/2017/aug/Amazon_Aug_Banner.jpg.imgix.banner.jpg);
+  /* position: absolute; */
+  width: 100%;
+}
+
+.ui.page.modals.transition.visible {
+    display: flex !important;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;

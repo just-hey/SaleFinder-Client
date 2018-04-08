@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Container, Image, Menu, Dropdown, Header, Responsive, Sidebar, Icon, Segment, Button, Transition } from 'semantic-ui-react'
 import DropDown from './DropDown'
 import SearchBar from './SearchBar'
+import Register from './Register'
 
 class NavBar extends Component {
   constructor(props) {
@@ -23,7 +24,9 @@ class NavBar extends Component {
                   <Menu.Menu position='right'>
                     <Menu.Item>
                       <Dropdown>
+                        
                         <DropDown />
+
                       </Dropdown>
                     </Menu.Item>
                   </Menu.Menu>

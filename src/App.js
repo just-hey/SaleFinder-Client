@@ -4,14 +4,15 @@ import './App.css'
 import axios from 'axios'
 
 // ---- Components ----
-import NavBar from './components/NavBar'
-import Register from './components/Register'
-import SearchBar from './components/SearchBar'
-import Cart from './components/Cart'
-import ProductList from './components/ProductList'
-// import ProductInfo from './components/ProductInfo'
-// import InfoModal from './components/InfoModal'
-import DimLoader from './components/DimLoader'
+import NavBar from './components/Headers/NavBar'
+import Banner from './components/Headers/Banner'
+import Register from './components/Headers/Register'
+import SearchBar from './components/Headers/SearchBar'
+import Cart from './components/Body/Cart'
+import ProductList from './components/Body/ProductList'
+// import ProductInfo from './components/Body/ProductInfo'
+// import InfoModal from './components/Headers/InfoModal'
+import DimLoader from './components/Body/DimLoader'
 
 const baseURL = `http://localhost:3000/`
 
@@ -19,6 +20,7 @@ class App extends Component {
   constructor(props) {
     super(props)
       this.state = {
+              // isLoggedIn: true,
               isLoggedIn: false,
               profile: null,
               search : {
@@ -30,7 +32,7 @@ class App extends Component {
   }
 
   componentWillMount = () => {
-    console.log('will mount')
+    console.log('will mount');
     this.checkForToken()
     this.requestProducts()
   }
@@ -48,26 +50,52 @@ class App extends Component {
 
   }
 
+  logUserIn = (email, password) => {
+    //do I want to just use phone instead? and remove email all together?
+    let body = { email, password }
+    return axios.post(`${baseURL}users/login`, body)
+      .then(response => {
+        console.log(response)
+        return response
+      })
+      .catch(err => {
+        console.log(err.response)
+        return err.response
+      })
+  }
+
+  registerNewUser = async (first_name, email, phone, password) => {
+    let body = { first_name, email, phone, password }
+    return axios.post(`${baseURL}users/signup`, body)
+      .then(response => {
+        return response
+      })
+      .catch(err =>{
+        return err.response
+      })
+  }
+
   logout = () => {
     localStorage.removeItem('token')
     this.setState({ isLoggedIn: false})
-    window.location.replace('/')
   }
 
   checkForToken = async () => {
-  if (localStorage.getItem('token')) {
-    console.log('yes token')
-    this.requestUserProfile()
-      .then(result => {
-        this.setState({
-          isLoggedIn: true,
-          profile: result
-          })
-      })
-      .catch(console.error)
+    if (localStorage.getItem('token')) {
+      this.requestUserProfile()
+        .then(result => {
+          this.setState({
+            isLoggedIn: true,
+            profile: result
+            })
+        })
+        .then(() =>{
+          this.requestUserCart()
+        })
+        .catch(console.error)
+    } else {
+      console.log('no token')
     }
-    console.log('no token')
-    this.requestUserCart()
   }
 
   requestUserProfile = () => {
@@ -84,7 +112,7 @@ class App extends Component {
     return (
       <Router>
         <div className='App container'>
-          <NavBar products={this.state.products}/>
+          {this.state.isLoggedIn ? (<NavBar products={this.state.products} isLoggedIn={this.state.isLoggedIn} />) : (<Banner register={ this.registerNewUser } login={ this.logUserIn } />) }
           {/* <SearchBar /> */}
           {/* <Register /> */}
           <Switch>

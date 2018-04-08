@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Card, Item, Button, Image, Transition } from 'semantic-ui-react'
 
 class ProductTile extends Component {
-  constructor(props, product) {
+  constructor(props) {
     super(props)
       // this.state = { visible: false }
   }
@@ -15,7 +15,7 @@ class ProductTile extends Component {
 
   render() {
     // const { visible } = this.state
-
+    // console.log(this.props)
     return (
         <Card>
           <Card.Content>
