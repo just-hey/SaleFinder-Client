@@ -10,8 +10,6 @@ import Register from './components/Headers/Register'
 import SearchBar from './components/Headers/SearchBar'
 import Cart from './components/Body/Cart'
 import ProductList from './components/Body/ProductList'
-// import ProductInfo from './components/Body/ProductInfo'
-// import InfoModal from './components/Headers/InfoModal'
 import DimLoader from './components/Body/DimLoader'
 
 const baseURL = `http://localhost:3000/`
@@ -20,7 +18,6 @@ class App extends Component {
   constructor(props) {
     super(props)
       this.state = {
-              // isLoggedIn: true,
               isLoggedIn: false,
               profile: null,
               search : {
@@ -28,17 +25,18 @@ class App extends Component {
                 "results": [],
                 "value": ""
               },
+              cart: [],
+              products: []
     }
   }
 
   componentWillMount = () => {
-    console.log('will mount');
     this.checkForToken()
-    this.requestProducts()
   }
 
-  requestProducts = async () => {
-    return axios.get(`${baseURL}products/all`)
+  requestProducts = async (zip) => {
+    let body = { zip }
+    return axios.post(`${baseURL}products/all`, body)
       .then(productsList => {
         let { products } = productsList.data
         this.setState({ products })
@@ -46,26 +44,49 @@ class App extends Component {
       .catch(console.error)
   }
 
-  requestUserCart = () => {
-
+  toggleInCart = (e, id) => {
+    e.preventDefault()
+    let user_id = this.state.profile
+    let body = { product_id: id, user_id }
+    return axios.post(`${baseURL}carts/change`, body)
+      .then(response => {
+        let newCart = response.data.cart
+        let products = this.state.products
+        this.setUpState(user_id, newCart, products)
+      })
   }
 
-  logUserIn = (email, password) => {
-    //do I want to just use phone instead? and remove email all together?
-    let body = { email, password }
+  attemptLogUserIn = (phone, password) => {
+    let body = { phone, password }
     return axios.post(`${baseURL}users/login`, body)
       .then(response => {
-        console.log(response)
-        return response
+        let userId = response.data.id
+        let cart = response.data.cart
+        let productsListCopy = this.state.products
+        let token = response.headers.auth.split(' ')[1]
+        localStorage.setItem('token', token)
+        this.setUpState(userId, cart, productsListCopy)
       })
       .catch(err => {
-        console.log(err.response)
         return err.response
       })
   }
 
-  registerNewUser = async (first_name, email, phone, password) => {
-    let body = { first_name, email, phone, password }
+  setUpState = (userId, cart, products) => {
+    products.forEach(product => {
+      product.inCart = false
+      return cart.forEach(cartItem => {
+        if(cartItem.product_id === product.id) {
+          product.inCart = true
+          return product
+        }
+      })
+    })
+    this.setState({ isLoggedIn: true, profile: userId, cart, products })
+  }
+
+  registerNewUser = async (first_name, zip, phone, password) => {
+    let body = { first_name, zip, phone, password }
     return axios.post(`${baseURL}users/signup`, body)
       .then(response => {
         return response
@@ -75,52 +96,51 @@ class App extends Component {
       })
   }
 
-  logout = () => {
+  viewAccount = () => {
+
+  }
+
+  viewCart = () => {
+
+  }
+
+  signOut = () => {
     localStorage.removeItem('token')
-    this.setState({ isLoggedIn: false})
+    this.setState({ isLoggedIn: false, profile: null, cart: [] })
   }
 
   checkForToken = async () => {
-    if (localStorage.getItem('token')) {
-      this.requestUserProfile()
-        .then(result => {
-          this.setState({
-            isLoggedIn: true,
-            profile: result
-            })
+    return this.requestProducts('local')
+    .then(()=> {
+      if (localStorage.getItem('token')) {
+        this.requestUserProfile()
+        .then(user => {
+          let products = this.state.products
+          this.setUpState(user.response.id, user.cart, products)
         })
-        .then(() =>{
-          this.requestUserCart()
-        })
-        .catch(console.error)
-    } else {
-      console.log('no token')
-    }
+      }
+    })
+    .catch(console.error)
   }
 
   requestUserProfile = () => {
-    let body = {token: localStorage.getItem('token')}
-    return axios.post(`${baseURL}users`, body)
-      .then(result => {
-        console.log('requested user profile...',result)
-        result.data
+    let token = localStorage.getItem('token')
+    return axios.get(`${baseURL}users/byToken`, { headers: { authorization: `Bearer ${token}` } })
+      .then(requestedProfile => {
+        return requestedProfile.data
       })
-      .catch(err => console.log(err))
+      .catch(console.error)
   }
 
   render() {
     return (
       <Router>
         <div className='App container'>
-          {this.state.isLoggedIn ? (<NavBar products={this.state.products} isLoggedIn={this.state.isLoggedIn} />) : (<Banner register={ this.registerNewUser } login={ this.logUserIn } />) }
-          {/* <SearchBar /> */}
-          {/* <Register /> */}
+          {this.state.isLoggedIn ? (<NavBar products={this.state.products} isLoggedIn={this.state.isLoggedIn} viewAccount={ this.viewAccount} viewCart={ this.viewCart} signOut={ this.signOut} />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
           <Switch>
             <Route path='/list' component={ Cart } />
-            {/* <Route path='/:id' component={ ProductInfo } /> */}
-            {this.state.products ? (<Route path='/' render={ () => <ProductList products={ this.state.products } /> } />) : (<DimLoader />)}
+            {this.state.products ? (<Route path='/' render={ () => <ProductList products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={this.state.profile} /> } />) : (<DimLoader />)}
           </Switch>
-          {/* <InfoModal /> */}
         </div>
       </Router>
     )

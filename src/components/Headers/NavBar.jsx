@@ -24,8 +24,8 @@ class NavBar extends Component {
                   <Menu.Menu position='right'>
                     <Menu.Item>
                       <Dropdown>
-                        
-                        <DropDown />
+
+                        <DropDown viewAccount={ this.props.viewAccount} viewCart={ this.props.viewCart} signOut={ this.props.signOut} />
 
                       </Dropdown>
                     </Menu.Item>
@@ -46,7 +46,7 @@ class NavBar extends Component {
                   <Menu.Menu position='right'>
                     <Menu.Item>
                       <Dropdown>
-                        <DropDown />
+                        <DropDown viewAccount={ this.props.viewAccount} viewCart={ this.props.viewCart} signOut={ this.props.signOut} />
                       </Dropdown>
                     </Menu.Item>
                   </Menu.Menu>
@@ -65,7 +65,7 @@ class NavBar extends Component {
                   <Menu.Menu position='right'>
                     <Menu.Item>
                       <Dropdown  simple>
-                        <DropDown />
+                        <DropDown viewAccount={ this.props.viewAccount} viewCart={ this.props.viewCart} signOut={ this.props.signOut} />
                       </Dropdown>
                     </Menu.Item>
                   </Menu.Menu>

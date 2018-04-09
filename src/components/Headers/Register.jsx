@@ -8,7 +8,7 @@ class Register extends Component {
     super(props)
     this.state = {
       name: '',
-      email: '',
+      zip: '',
       phone: '',
       password: '',
       showResult: false,
@@ -19,8 +19,8 @@ class Register extends Component {
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
   handleSubmit = async () => {
-    const { name, email, phone, password } = this.state
-    let result = await this.props.register( name, email, phone, password )
+    const { name, zip, phone, password } = this.state
+    let result = await this.props.register( name, zip, phone, password )
     if (result.status == 201) {
       this.displayResults('Thank you for registering!')
     } else {
@@ -41,7 +41,7 @@ class Register extends Component {
   }
 
   render() {
-    const { name, email, phone, password } = this.state
+    const { name, zip, phone, password } = this.state
     return (
       <Modal trigger={ <a>Register</a> } closeIcon>
         <Transition animation='fade'>
@@ -57,7 +57,7 @@ class Register extends Component {
                 </Header>
                 <Form size='large' onSubmit={this.handleSubmit}>
                   <Segment stacked>
-                    {/* first_name, email, phone, password */}
+                    {/* first_name, zip, phone, password */}
                       <Form.Input
                         name='name'
                         value={name}
@@ -69,14 +69,14 @@ class Register extends Component {
                         type='text'
                       />
                       <Form.Input
-                        name='email'
-                        value={email}
+                        name='zip'
+                        value={zip}
                         onChange={this.handleChange}
                         fluid
-                        icon='mail'
+                        icon='marker'
                         iconPosition='left'
-                        placeholder='E-mail address'
-                        type='email'
+                        placeholder='Zip Code'
+                        type='text'
                       />
                       <Form.Input
                         name='phone'

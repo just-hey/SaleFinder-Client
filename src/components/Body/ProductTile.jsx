@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Item, Button, Image, Transition } from 'semantic-ui-react'
+import CartButton from './CartButton'
 
 class ProductTile extends Component {
   constructor(props) {
@@ -15,7 +16,6 @@ class ProductTile extends Component {
 
   render() {
     // const { visible } = this.state
-    // console.log(this.props)
     return (
         <Card>
           <Card.Content>
@@ -33,7 +33,9 @@ class ProductTile extends Component {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Button basic> Add to list </Button>
+
+            {this.props.user_id ? (<CartButton inCart={ this.props.product.inCart } product_id={ this.props.product.id } toggleInCart={ this.props.toggleInCart } user_id={ this.props.user_id }/>) : ('')}
+
           </Card.Content>
         </Card>
     )

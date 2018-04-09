@@ -4,7 +4,6 @@ import Register from './Register'
 import Login from './Login'
 
 const Banner = ({ register, login }) => {
-  console.log(register)
   return (
     <div>
       <Responsive {...Responsive.onlyComputer}>

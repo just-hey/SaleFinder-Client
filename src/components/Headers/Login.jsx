@@ -7,7 +7,7 @@ class Login extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      email: '',
+      phone: '',
       password: '',
       resultMessage: ''
   }}
@@ -15,30 +15,31 @@ class Login extends Component {
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
   handleSubmit = async () => {
-    const { name, email, phone, password } = this.state
-    let result = await this.props.login( email, password )
-    if (result.status == 201) {
-      this.displayResults('Welcome back!')
-    } else {
-      this.displayResults(result.data.message)
-    }
+    const { phone, password } = this.state
+    console.log(phone, password)
+    let result = await this.props.login( phone, password )
+    // if (result.status == 201) {
+    //   this.displayResults('Welcome back!')
+    // } else {
+    // if(result) this.displayResults(result.data.message)
+    // }
   }
 
   displayResults = (message) => {
-    this.setState({ resultMessage: message })
-    //need to fade in and then fade out
-
-    if (message == 'Welcome back!') {
-      //meaning registering was a success
-        //run login()
-    } else {
-      //meaning it was a fail, fade away error message and wait for another attempt.
-    }
+    // this.setState({ resultMessage: message })
+    // //need to fade in and then fade out
+    //
+    // if (message == 'Welcome back!') {
+    //   //meaning registering was a success
+    //     //run login()
+    // } else {
+    //   //meaning it was a fail, fade away error message and wait for another attempt.
+    // }
   }
 
 
   render() {
-    const { email, password } = this.state
+    const { phone, password } = this.state
     return (
       <Modal trigger={ <a>Log in</a> } closeIcon>
         <Transition animation='fade'>
@@ -57,14 +58,14 @@ class Login extends Component {
                   <Segment stacked>
 
                       <Form.Input
-                        name='email'
-                        value={email}
+                        name='phone'
+                        value={phone}
                         onChange={this.handleChange}
                         fluid
-                        icon='mail'
+                        icon='phone'
                         iconPosition='left'
-                        placeholder='E-mail address'
-                        type='email'
+                        placeholder='Phone Number'
+                        type='text'
                       />
                       <Form.Input
                         name='password'

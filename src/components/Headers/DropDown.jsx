@@ -1,12 +1,12 @@
 import React from 'react'
-import { Dropdown, Grid, Header, Image, Modal, Icon } from 'semantic-ui-react'
+import { Dropdown, Icon } from 'semantic-ui-react'
 
-const DropDown = () => {
+const DropDown = ({ viewAccount, viewCart, signOut }) => {
 
   let options = [
-    { key: 'user', text: 'Account', icon: 'user'},
-    { key: 'List', text: 'List', icon: 'sticky note'},
-    { key: 'sign-out', text: 'Sign Out', icon: 'sign out'}
+    { key: 'user', text: 'Account', icon: 'user', onClick: viewAccount },
+    { key: 'List', text: 'List', icon: 'sticky note', onClick: viewCart },
+    { key: 'sign-out', text: 'Sign Out', icon: 'sign out', onClick: signOut }
   ]
 
   return (
