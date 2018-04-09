@@ -66,6 +66,7 @@ class App extends Component {
         let token = response.headers.auth.split(' ')[1]
         localStorage.setItem('token', token)
         this.setUpState(userId, cart, productsListCopy)
+        this.checkForToken()
       })
       .catch(err => {
         return err.response
