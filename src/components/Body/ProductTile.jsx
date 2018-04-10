@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Item, Button, Image, Transition } from 'semantic-ui-react'
+import { Card, Item, Button, Image, Transition, Header } from 'semantic-ui-react'
 import CartButton from './CartButton'
 
 class ProductTile extends Component {
@@ -18,20 +18,20 @@ class ProductTile extends Component {
     const { visible } = this.state
     return (
         <Card>
+          {/* <Card.Content> */}
+            <Image spaced centered size='medium' src={this.props.product.image} />
+          {/* </Card.Content> */}
           <Card.Content>
-            <Image centered size='medium' src={this.props.product.image} />
           </Card.Content>
-          <Card.Content>
-            <Card.Header>
+            <Header>
               {this.props.product.name}
-            </Card.Header>
+            </Header>
             <Card.Meta>
               {this.props.product.store}
             </Card.Meta>
             <Card.Description>
               {this.props.product.price}
             </Card.Description>
-          </Card.Content>
 
 
             {this.props.user_id ? (<CartButton inCart={ this.props.product.inCart } product_id={ this.props.product.id } toggleInCart={ this.props.toggleInCart } user_id={ this.props.user_id }/>) : ('')}

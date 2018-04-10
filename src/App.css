@@ -1,4 +1,4 @@
-/* https://coolors.co/050505-1b9aaa-dddbcb-2ffc41-485665 */
+/* https://coolors.co/050505-1b9aaa-F7F6F2-2ffc41-485665 */
 
 #allProductsList {
   padding-top: 3.5rem;
@@ -10,13 +10,34 @@
   color: #050505;
 }
 
+.ui.basic.button.removeListBtn {
+  background-color: pink !important;
+  color: #485665 !important;
+}
+
+.ui.basic.button.addListBtn {
+  background-color: #1B9AAA !important;
+  color: #F7F6F2 !important;
+}
+
 .ui.basic.button {
   width: 80%;
+  margin: 1rem 0;
+}
+
+.ui.header {
+  color: #050505;
+}
+.ui.cards>.card {
+  color: #050505;
+}
+
+.ui.card .meta, .ui.cards>.card .meta {
+  color: #485665;
 }
 
 #banner {
   background-image: url(http://www.oliverwyman.com/content/dam/oliver-wyman/v2/publications/2017/aug/Amazon_Aug_Banner.jpg.imgix.banner.jpg);
-  /* position: absolute; */
   width: 100%;
 }
 
@@ -57,4 +78,9 @@
 #searchBarDeskTop {
   /* margin: 3px 0; */
   width: 60%;
+}
+.ui.medium.image, .ui.medium.images .image, .ui.medium.images img, .ui.medium.images svg {
+  width: auto;
+  max-height: auto;
+  margin-top: 2rem;;
 }
