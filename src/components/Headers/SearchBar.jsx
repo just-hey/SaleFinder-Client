@@ -76,12 +76,10 @@ let products
 class SearchBar extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props)
   }
 
 
   componentWillMount() {
-    console.log('mounting search', this.props.products)
     if (this.props.products) products = this.props.products
     this.setState({ products: products })
     this.resetComponent()
@@ -91,7 +89,6 @@ class SearchBar extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.setState({ value: result.name })
-    console.log('im state!',this.state)
   }
 
   toggleVisibility = () => {
@@ -116,7 +113,6 @@ class SearchBar extends Component {
 
   render() {
     const { isLoading, value, results, visible } = this.state
-    console.log('SearchBar', products)
     return (
       <div>
         <Search

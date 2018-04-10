@@ -10,7 +10,6 @@ class NavBar extends Component {
   }
 
   render() {
-    console.log('navbar',this.props.products)
     return (
       <div>
           <Responsive { ...Responsive.onlyComputer }>
