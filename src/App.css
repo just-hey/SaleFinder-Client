@@ -10,6 +10,10 @@
   color: #050505;
 }
 
+.ui.basic.button {
+  width: 80%;
+}
+
 #banner {
   background-image: url(http://www.oliverwyman.com/content/dam/oliver-wyman/v2/publications/2017/aug/Amazon_Aug_Banner.jpg.imgix.banner.jpg);
   /* position: absolute; */
@@ -51,6 +55,6 @@
 }
 
 #searchBarDeskTop {
-  margin: 3px 0;
-  width: 600px;
+  /* margin: 3px 0; */
+  width: 60%;
 }

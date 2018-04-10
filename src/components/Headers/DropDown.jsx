@@ -11,10 +11,9 @@ const DropDown = ({ viewAccount, viewCart, signOut }) => {
 
   return (
     <Dropdown
-        simple
         trigger={
 
-             <Icon name='user' />
+             <Icon name='bars' />
 
         }
         options={options}

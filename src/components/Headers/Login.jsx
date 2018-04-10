@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment, Modal, Transition } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment, Modal, Transition } from 'semantic-ui-react'
 import Register from './Register'
 
 class Login extends Component {
@@ -17,7 +17,7 @@ class Login extends Component {
   handleSubmit = async () => {
     const { phone, password } = this.state
     console.log(phone, password)
-    let result = await this.props.login( phone, password )
+    await this.props.login( phone, password )
     // if (result.status == 201) {
     //   this.displayResults('Welcome back!')
     // } else {

@@ -21,7 +21,7 @@ class Register extends Component {
   handleSubmit = async () => {
     const { name, zip, phone, password } = this.state
     let result = await this.props.register( name, zip, phone, password )
-    if (result.status == 201) {
+    if (result.status === 201) {
       this.displayResults('Thank you for registering!')
     } else {
       this.displayResults(result.data.message)
@@ -32,7 +32,7 @@ class Register extends Component {
     this.setState({ resultMessage: message })
     //need to fade in and then fade out
 
-    if (message == 'Thank you for registering!') {
+    if (message === 'Thank you for registering!') {
       //meaning registering was a success
         //run login()
     } else {

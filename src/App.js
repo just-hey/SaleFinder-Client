@@ -98,26 +98,33 @@ class App extends Component {
   }
 
   viewAccount = () => {
-
+    let user_id = this.state.profile
+    console.log(user_id)
   }
 
-  viewCart = () => {
+  viewCart = async () => {
+    let user_id = this.state.profile
+    let cart = await this.state.cart
+    let ids = await cart.map(item => item.id)
 
+    let products = await axios.post(`${baseURL}products/byIds`, { ids })
+    console.log(products)
   }
 
   signOut = () => {
     localStorage.removeItem('token')
-    this.setState({ isLoggedIn: false, profile: null, cart: [] })
+    this.setState({ isLoggedIn: false, profile: null, cart: [], products: [] })
+    this.componentWillMount()
   }
 
   checkForToken = async () => {
     return this.requestProducts('local')
     .then(()=> {
       if (localStorage.getItem('token')) {
-        this.requestUserProfile()
+        return this.requestUserProfile()
         .then(user => {
           let products = this.state.products
-          this.setUpState(user.response.id, user.cart, products)
+          return this.setUpState(user.response.id, user.cart, products)
         })
       }
     })
@@ -139,8 +146,11 @@ class App extends Component {
         <div className='App container'>
           {this.state.isLoggedIn ? (<NavBar products={this.state.products} isLoggedIn={this.state.isLoggedIn} viewAccount={ this.viewAccount} viewCart={ this.viewCart} signOut={ this.signOut} />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
           <Switch>
-            <Route path='/list' component={ Cart } />
-            {this.state.products ? (<Route path='/' render={ () => <ProductList products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={this.state.profile} /> } />) : (<DimLoader />)}
+            {this.state.products ? (<Route path='/home' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={this.state.profile} /> } />) : (<DimLoader />)}
+            <Route path='/list' render={
+              (props) => (<Cart { ...props }  />)
+              }
+            />
           </Switch>
         </div>
       </Router>

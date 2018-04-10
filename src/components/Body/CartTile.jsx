@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Card, Item, Button, Image, Transition } from 'semantic-ui-react'
 import CartButton from './CartButton'
 
-class ProductTile extends Component {
+class CartTile extends Component {
   constructor(props) {
     super(props)
       this.state = { visible: false }
@@ -32,10 +32,10 @@ class ProductTile extends Component {
               {this.props.product.price}
             </Card.Description>
           </Card.Content>
-
+{/* 
 
             {this.props.user_id ? (<CartButton inCart={ this.props.product.inCart } product_id={ this.props.product.id } toggleInCart={ this.props.toggleInCart } user_id={ this.props.user_id }/>) : ('')}
-
+ */}
 
         </Card>
     )
@@ -43,4 +43,4 @@ class ProductTile extends Component {
 
 }
 
-export default ProductTile
+export default CartTile

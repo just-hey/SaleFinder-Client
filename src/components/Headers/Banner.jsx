@@ -1,5 +1,5 @@
 import React from 'react'
-import { Responsive, Transition, Segment, Header } from 'semantic-ui-react'
+import { Button, Responsive, Transition, Segment, Header } from 'semantic-ui-react'
 import Register from './Register'
 import Login from './Login'
 
@@ -13,9 +13,11 @@ const Banner = ({ register, login }) => {
               INFO ABOUT THINGS AND STUFF
             </Header>
             <Header as='h3' textAlign='center'>
-              <Register register={ register } login={ login } />
-              /
-              <Login register={ register } login={ login } />
+              <Button.Group>
+                <Button> <Register register={ register } login={ login } /> </Button>
+                <Button.Or />
+                <Button> <Login register={ register } login={ login } /> </Button>
+              </Button.Group>
             </Header>
           </Segment>
         </Transition>
@@ -28,9 +30,11 @@ const Banner = ({ register, login }) => {
               INFO ABOUT THINGS AND STUFF
             </Header>
             <Header as='h3' textAlign='center'>
-              <Register register={ register } login={ login } />
-              /
-              <Login register={ register } login={ login } />
+              <Button.Group>
+                <Button> <Register register={ register } login={ login } /> </Button>
+                <Button.Or />
+                <Button> <Login register={ register } login={ login } /> </Button>
+              </Button.Group>
             </Header>
           </Segment>
         </Transition>
@@ -43,9 +47,11 @@ const Banner = ({ register, login }) => {
               INFO ABOUT THINGS AND STUFF
             </Header>
             <Header as='h3' textAlign='center'>
-              <Register register={ register } login={ login } />
-              /
-              <Login register={ register } login={ login } />
+              <Button.Group>
+                <Button> <Register register={ register } login={ login } /> </Button>
+                <Button.Or />
+                <Button> <Login register={ register } login={ login } /> </Button>
+              </Button.Group>
             </Header>
           </Segment>
         </Transition>
