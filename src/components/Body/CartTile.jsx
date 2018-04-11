@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Item, Button, Image, Transition } from 'semantic-ui-react'
-import CartButton from './CartButton'
+import RemoveFromList from './RemoveFromList'
 
 class CartTile extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class CartTile extends Component {
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   render() {
-    console.log(this.props.product);
+    console.log(this.props);
     const { visible } = this.state
     return (
         <Card>
@@ -33,10 +33,8 @@ class CartTile extends Component {
               {this.props.product.price}
             </Card.Description>
           </Card.Content>
-{/*
 
-            {this.props.user_id ? (<CartButton inCart={ this.props.product.inCart } product_id={ this.props.product.id } toggleInCart={ this.props.toggleInCart } user_id={ this.props.user_id }/>) : ('')}
- */}
+          <RemoveFromList product_id={ this.props.product.id } toggleInCart={ this.props.toggleInCart } />
 
         </Card>
     )
