@@ -14,7 +14,7 @@ class NavBar extends Component {
       <div>
           <Responsive { ...Responsive.onlyComputer }>
             <Transition transitionOnMount animation='fade down' duration={1000}>
-              <Menu fixed='top' inverted>
+              <Menu fixed='top'>
                 <Container>
                   <Menu.Item as='a' header>
                    SaleFinder
@@ -38,7 +38,7 @@ class NavBar extends Component {
 
           <Responsive {...Responsive.onlyTablet}>
             <Transition transitionOnMount animation='fade down' duration={1000}>
-              <Menu fixed='top' inverted>
+              <Menu fixed='top'>
                 <Container>
                   <Menu.Item as='a' header>
                    SaleFinder
@@ -60,7 +60,7 @@ class NavBar extends Component {
 
           <Responsive {...Responsive.onlyMobile}>
             <Transition transitionOnMount animation='fade down' duration={1000}>
-              <Menu fixed='top' inverted>
+              <Menu fixed='top'>
                 <Container>
                   <Menu.Item>
                     <Dropdown>

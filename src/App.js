@@ -157,14 +157,14 @@ class App extends Component {
       <Router>
         <div className='App container'>
           {this.state.isLoggedIn ? (<NavBar products={this.state.products} isLoggedIn={this.state.isLoggedIn} viewAccount={ this.viewAccount} viewCart={ this.viewCart} signOut={ this.signOut} />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
-          <Cart cartItems={ this.state.cart } toggleInCart={ this.toggleInCart }/>
-          {/* <Switch>
+          {/* <Cart cartItems={ this.state.cart } toggleInCart={ this.toggleInCart }/> */}
+          <Switch>
             {this.state.ready ? (<Route path='/' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={this.state.profile} /> } />) : (<DimLoader />)}
             <Route path='/list' render={
               (props) => (<Cart { ...props }  />)
               }
             />
-          </Switch> */}
+          </Switch>
         </div>
       </Router>
     )
