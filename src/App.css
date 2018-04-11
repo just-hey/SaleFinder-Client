@@ -25,8 +25,25 @@
   margin: 1rem 0;
 }
 
+.ui.buttons:not(.basic):not(.inverted)>.button, .ui.buttons>.ui.button:not(.basic):not(.inverted) {
+  background-color: #1B9AAA;
+}
+
+.ui.teal.button {
+  background-color: #1B9AAA;
+}
+
+.ui.message>:last-child {
+  color: #1B9AAA !important;
+}
+
+a {
+  color: #050505 !important;
+}
+
 .ui.header {
   color: #050505;
+  margin: 0 1rem 1rem 1rem;
 }
 .ui.cards>.card {
   color: #050505;
@@ -83,4 +100,8 @@
   width: auto;
   max-height: auto;
   margin-top: 2rem;;
+}
+
+.ui.card>:last-child, .ui.cards>.card>:last-child {
+  margin: 1rem;
 }

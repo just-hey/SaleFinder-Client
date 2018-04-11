@@ -18,6 +18,7 @@ class App extends Component {
   constructor(props) {
     super(props)
       this.state = {
+              ready: false,
               isLoggedIn: false,
               profile: null,
               search : {
@@ -31,6 +32,7 @@ class App extends Component {
   }
 
   componentWillMount = async () => {
+    this.setState({ ready: false })
     await this.checkForToken()
 
   }
@@ -86,7 +88,7 @@ class App extends Component {
         }
       })
     })
-    this.setState({ isLoggedIn, profile, cart, products })
+    this.setState({ isLoggedIn, profile, cart, products, ready: true })
     return
   }
 
@@ -107,11 +109,11 @@ class App extends Component {
   }
 
   viewCart = async () => {
-    let user_id = this.state.profile
+    let user_id = this.state.profile.id
     let cart = await this.state.cart
     let ids = await cart.map(item => item.id)
 
-    let products = await axios.post(`${baseURL}products/byIds`, { ids })
+    let products = await axios.get(`${baseURL}carts/find/${user_id}`)
     console.log(products)
   }
 
@@ -123,14 +125,12 @@ class App extends Component {
 
   checkForToken = () => {
     if (localStorage.getItem('token')) {
-      console.log('have token')
       return this.requestUserProfile()
       .then(user => {
         return this.setUpState(user.response, user.cart, user.products, true)
       })
       .catch(console.error)
     } else {
-      console.log('no token')
       return this.requestProducts('local')
       .then(products => {
         return this.setUpState(null, [], products, false)
@@ -156,8 +156,9 @@ class App extends Component {
       <Router>
         <div className='App container'>
           {this.state.isLoggedIn ? (<NavBar products={this.state.products} isLoggedIn={this.state.isLoggedIn} viewAccount={ this.viewAccount} viewCart={ this.viewCart} signOut={ this.signOut} />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
+          {/* <Cart cartItems={ this.state.cart }/> */}
           <Switch>
-            {this.state.products ? (<Route path='/' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={this.state.profile} /> } />) : (<DimLoader />)}
+            {this.state.ready ? (<Route path='/' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={this.state.profile} /> } />) : (<DimLoader />)}
             <Route path='/list' render={
               (props) => (<Cart { ...props }  />)
               }
