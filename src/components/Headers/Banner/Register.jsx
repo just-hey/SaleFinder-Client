@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment, Modal, Transition } from 'semantic-ui-react'
 import Login from './Login'
+import axios from 'axios'
 
 class Register extends Component {
 
@@ -28,13 +29,18 @@ class Register extends Component {
     }
   }
 
+
+  scrapeTrigger = async () => {
+    let zip = await this.state.zip
+    return axios.get(`http://localhost:8002/scrape/${zip}`)
+  }
+
   displayResults = (message) => {
     this.setState({ resultMessage: message })
-    //need to fade in and then fade out
-
     if (message === 'Thank you for registering!') {
-      //meaning registering was a success
-        //run login()
+        this.scrapeTrigger()
+          .then(() => true)
+          .catch(console.error)
     } else {
       //meaning it was a fail, fade away error message and wait for another attempt.
     }

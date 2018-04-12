@@ -50,6 +50,16 @@
 a {
   color: #050505 !important;
 }
+.productCards {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+}
+
+.cardText {
+  /* display: flex; */
+  /* align-self: flex-end; */
+}
 
 .ui.header {
   color: #050505;

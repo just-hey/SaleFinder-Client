@@ -4,12 +4,12 @@ import './App.css'
 import axios from 'axios'
 
 // ---- Components ----
-import NavBar from './components/Headers/NavBar'
-import Banner from './components/Headers/Banner'
-import Register from './components/Headers/Register'
-import SearchBar from './components/Headers/SearchBar'
-import Cart from './components/Body/Cart'
-import ProductList from './components/Body/ProductList'
+import NavBar from './components/Headers/Nav/NavBar'
+import Banner from './components/Headers/Banner/Banner'
+import Register from './components/Headers/Banner/Register'
+import SearchBar from './components/Headers/Nav/SearchBar'
+import Cart from './components/Body/Cart/Cart'
+import ProductList from './components/Body/Products/ProductList'
 import DimLoader from './components/Body/DimLoader'
 
 const baseURL = `http://localhost:3000/`
@@ -22,9 +22,9 @@ class App extends Component {
               isLoggedIn: false,
               profile: null,
               search : {
-                "isLoading": false,
-                "results": [],
-                "value": ""
+                isLoading: false,
+                results: [],
+                value: ''
               },
               cart: [],
               products: []
@@ -113,7 +113,6 @@ class App extends Component {
     let user_id = this.state.profile.id
     let cart = await this.state.cart
     let ids = await cart.map(item => item.id)
-
     let products = await axios.get(`${baseURL}carts/find/${user_id}`)
     console.log(products)
   }
@@ -159,11 +158,15 @@ class App extends Component {
           {this.state.isLoggedIn ? (<NavBar products={this.state.products} isLoggedIn={this.state.isLoggedIn} viewAccount={ this.viewAccount} viewCart={ this.viewCart} signOut={ this.signOut} />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
           {/* <Cart cartItems={ this.state.cart } toggleInCart={ this.toggleInCart }/> */}
           <Switch>
-            {this.state.ready ? (<Route path='/' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={this.state.profile} /> } />) : (<DimLoader />)}
-            <Route path='/list' render={
-              (props) => (<Cart { ...props }  />)
+            {this.state.ready ? (<Route exact path='/' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={this.state.profile} /> } />) : (<DimLoader />)}
+            <Route exact path='/list' render={
+              (props) => (<Cart cartItems={ this.state.cart } toggleInCart={ this.toggleInCart }/>)
               }
             />
+            {/* <Route path='/account' render={
+              (props) => (<Account />)
+              }
+            /> */}
           </Switch>
         </div>
       </Router>

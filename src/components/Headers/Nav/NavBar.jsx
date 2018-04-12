@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Image, Menu, Dropdown, Header, Responsive, Sidebar, Icon, Segment, Button, Transition } from 'semantic-ui-react'
 import DropDown from './DropDown'
 import SearchBar from './SearchBar'
-import Register from './Register'
+import Register from '../Banner/Register'
 
 class NavBar extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class NavBar extends Component {
               <Menu fixed='top'>
                 <Container>
                   <Menu.Item as='a' header>
-                   SaleFinder
+                   <Image size='small' src='../../../Images/SaleFinder.png' />
                   </Menu.Item>
                   <Menu.Menu position='right'>
                     <Menu.Item>

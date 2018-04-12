@@ -17,12 +17,10 @@ class ProductTile extends Component {
   render() {
     const { visible } = this.state
     return (
-        <Card>
-          {/* <Card.Content> */}
+
+        <Card className='productCards'>
             <Image spaced centered size='medium' src={this.props.product.image} />
-          {/* </Card.Content> */}
-          <Card.Content>
-          </Card.Content>
+          <div className='cardText'>
             <Header>
               {this.props.product.name}
             </Header>
@@ -33,10 +31,8 @@ class ProductTile extends Component {
               {this.props.product.price}
             </Card.Description>
 
-
             {this.props.user_id ? (<CartButton inCart={ this.props.product.inCart } product_id={ this.props.product.id } toggleInCart={ this.props.toggleInCart } user_id={ this.props.user_id }/>) : ('')}
-
-
+          </div>
         </Card>
     )
   }

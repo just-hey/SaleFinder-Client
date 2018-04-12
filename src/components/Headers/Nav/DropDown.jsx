@@ -17,7 +17,6 @@ const DropDown = ({ viewAccount, viewCart, signOut }) => {
 
         }
         options={options}
-        // pointing='top'
         icon={null}/>
 
   )
