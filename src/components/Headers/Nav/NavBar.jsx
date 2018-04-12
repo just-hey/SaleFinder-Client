@@ -3,6 +3,7 @@ import { Container, Image, Menu, Dropdown, Header, Responsive, Sidebar, Icon, Se
 import DropDown from './DropDown'
 import SearchBar from './SearchBar'
 import Register from '../Banner/Register'
+import { withRouter } from 'react-router-dom'
 
 class NavBar extends Component {
   constructor(props) {
@@ -10,23 +11,24 @@ class NavBar extends Component {
   }
 
   render() {
+    const { products, viewProfile, viewHome, viewCart, history, signOut } = this.props
     return (
       <div>
           <Responsive { ...Responsive.onlyComputer }>
-            <Transition transitionOnMount animation='fade down' duration={1000}>
+            <Transition transitionOnMount animation='fade down' duration={ 1000 }>
               <Menu fixed='top'>
                 <Container>
-                  <Menu.Item as='a' header>
-                   <Image size='small' src='../../../Images/SaleFinder.png' />
+                  <Menu.Item as='a' onClick={ viewHome(history) } header>
+                   SaleFinder
                   </Menu.Item>
                   <Menu.Menu position='right'>
                     <Menu.Item>
-                      <SearchBar products={ this.props.products }/>
+                      <SearchBar products={ products }/>
                     </Menu.Item>
                     <Menu.Item>
                       <Dropdown>
 
-                        <DropDown viewAccount={ this.props.viewAccount} viewCart={ this.props.viewCart} signOut={ this.props.signOut} />
+                        <DropDown viewProfile={ viewProfile(history) } viewCart={ viewCart(history) } signOut={ signOut } />
 
                       </Dropdown>
                     </Menu.Item>
@@ -36,8 +38,8 @@ class NavBar extends Component {
             </Transition>
           </Responsive>
 
-          <Responsive {...Responsive.onlyTablet}>
-            <Transition transitionOnMount animation='fade down' duration={1000}>
+          <Responsive { ...Responsive.onlyTablet }>
+            <Transition transitionOnMount animation='fade down' duration={ 1000 }>
               <Menu fixed='top'>
                 <Container>
                   <Menu.Item as='a' header>
@@ -45,10 +47,10 @@ class NavBar extends Component {
                   </Menu.Item>
                   <Menu.Menu position='right'>
                     <Menu.Item>
-                      <SearchBar products={ this.props.products }/>
+                      <SearchBar products={ products }/>
                       <Dropdown>
 
-                        <DropDown viewAccount={ this.props.viewAccount} viewCart={ this.props.viewCart} signOut={ this.props.signOut} />
+                        <DropDown viewProfile={ viewProfile } viewCart={ viewCart } signOut={ signOut } />
 
                       </Dropdown>
                     </Menu.Item>
@@ -58,22 +60,22 @@ class NavBar extends Component {
             </Transition>
           </Responsive>
 
-          <Responsive {...Responsive.onlyMobile}>
-            <Transition transitionOnMount animation='fade down' duration={1000}>
+          <Responsive { ...Responsive.onlyMobile }>
+            <Transition transitionOnMount animation='fade down' duration={ 1000 }>
               <Menu fixed='top'>
                 <Container>
                   <Menu.Item>
                     <Dropdown>
 
-                      <DropDown viewAccount={ this.props.viewAccount} viewCart={ this.props.viewCart} signOut={ this.props.signOut} />
+                      <DropDown viewProfile={ viewProfile } viewCart={ viewCart } signOut={ signOut } />
 
                     </Dropdown>
                   </Menu.Item>
-                    <Menu.Item>
+                  <Menu.Item>
 
-                      <SearchBar products={ this.props.products }/>
+                    <SearchBar products={ products }/>
 
-                    </Menu.Item>
+                  </Menu.Item>
                 </Container>
               </Menu>
             </Transition>
@@ -83,4 +85,4 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar
+export default withRouter(NavBar)

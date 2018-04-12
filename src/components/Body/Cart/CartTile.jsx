@@ -15,26 +15,26 @@ class CartTile extends Component {
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   render() {
-    console.log(this.props);
+    const { product, toggleInCart } = this.props
     const { visible } = this.state
     return (
         <Card>
           <Card.Content>
-            <Image centered size='medium' src={this.props.product.image} />
+            <Image centered size='medium' src={ product.image } />
           </Card.Content>
           <Card.Content>
             <Card.Header>
-              {this.props.product.name}
+              { product.name }
             </Card.Header>
             <Card.Meta>
-              {this.props.product.store}
+              { product.store }
             </Card.Meta>
             <Card.Description>
-              {this.props.product.price}
+              { product.price }
             </Card.Description>
           </Card.Content>
 
-          <RemoveFromList product_id={ this.props.product.id } toggleInCart={ this.props.toggleInCart } />
+          <RemoveFromList product_id={ product.id } toggleInCart={ toggleInCart } />
 
         </Card>
     )
