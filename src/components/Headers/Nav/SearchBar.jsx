@@ -48,15 +48,14 @@ class SearchBar extends Component {
     return (
       <div>
         <Search
-          id='searchBarDeskTop'
           fixed='true'
           aligned='right'
-          loading={isLoading}
-          onResultSelect={this.handleResultSelect}
-          onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
-          results={results}
-          value={value}
-          {...this.props}
+          loading={ isLoading }
+          onResultSelect={ this.handleResultSelect }
+          onSearchChange={ _.debounce(this.handleSearchChange, 500, { leading: true }) }
+          results={ results }
+          value={ value }
+          { ...this.props }
         />
       </div>
     )

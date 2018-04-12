@@ -42,7 +42,7 @@ class NavBar extends Component {
             <Transition transitionOnMount animation='fade down' duration={ 1000 }>
               <Menu fixed='top'>
                 <Container>
-                  <Menu.Item as='a' header>
+                  <Menu.Item as='a' onClick={ viewHome(history) } header>
                    SaleFinder
                   </Menu.Item>
                   <Menu.Menu position='right'>
@@ -50,7 +50,7 @@ class NavBar extends Component {
                       <SearchBar products={ products }/>
                       <Dropdown>
 
-                        <DropDown viewProfile={ viewProfile } viewCart={ viewCart } signOut={ signOut } />
+                        <DropDown viewProfile={ viewProfile(history) } viewCart={ viewCart(history) } signOut={ signOut } />
 
                       </Dropdown>
                     </Menu.Item>
@@ -64,18 +64,21 @@ class NavBar extends Component {
             <Transition transitionOnMount animation='fade down' duration={ 1000 }>
               <Menu fixed='top'>
                 <Container>
-                  <Menu.Item>
-                    <Dropdown>
-
-                      <DropDown viewProfile={ viewProfile } viewCart={ viewCart } signOut={ signOut } />
-
-                    </Dropdown>
+                  <Menu.Item as='a' onClick={ viewHome(history) } header>
+                    S.F.
                   </Menu.Item>
-                  <Menu.Item>
+                    <Menu.Item>
 
-                    <SearchBar products={ products }/>
+                      <SearchBar products={ products }/>
 
-                  </Menu.Item>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Dropdown direction='left'>
+
+                        <DropDown viewProfile={ viewProfile(history) } viewCart={ viewCart(history) } signOut={ signOut } />
+
+                      </Dropdown>
+                    </Menu.Item>
                 </Container>
               </Menu>
             </Transition>

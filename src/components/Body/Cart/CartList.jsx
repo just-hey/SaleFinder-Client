@@ -3,7 +3,6 @@ import { Button, Card, Image, Item, List, Transition } from 'semantic-ui-react'
 import CartTile from './CartTile'
 
 const CartList = ({ cartItems, toggleInCart }) => {
-  console.log('CartList', cartItems);
   return (
     <Transition transitionOnMount animation='scale in' duration={1000}>
       <Card.Group centered id='allProductsList'>

@@ -55,7 +55,6 @@ class App extends Component {
       })
   }
 
-
   checkForToken = () => {
     if (localStorage.getItem('token')) {
       return this.requestUserProfile()
@@ -89,6 +88,19 @@ class App extends Component {
         return products
       })
       .catch(console.error)
+  }
+
+  requestUserProfileEdit = (first_name, zip, phone, password) => {
+    //build body out of info to be changed use spread on state.profile {...}?
+    let id = this.state.profile.id
+    let body = { first_name, zip, phone, password }
+    let token = localStorage.getItem('token')
+    return axios.put(`${baseURL}users/${id}`, { headers: { authorization: `Bearer ${token}` }, body })
+      .then(requestedProfile => requestedProfile.data)
+      .catch(err => {
+        localStorage.removeItem('token')
+        this.checkForToken()
+      })
   }
 
   requestUserProfile = () => {
@@ -150,14 +162,14 @@ class App extends Component {
     return (
       <Router>
         <div className='App container'>
-          {this.state.isLoggedIn ? (<NavBar products={this.state.products} isLoggedIn={this.state.isLoggedIn} viewProfile={ this.viewProfile} viewCart={ this.viewCart} viewHome={ this.viewHome } signOut={ this.signOut} />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
+          { this.state.isLoggedIn ? (<NavBar products={ this.state.products } isLoggedIn={ this.state.isLoggedIn } viewProfile={ this.viewProfile } viewCart={ this.viewCart } viewHome={ this.viewHome } signOut={ this.signOut } />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
           <Switch>
-            {this.state.ready ? (<Route exact path='/' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={this.state.profile} /> } />) : (<DimLoader />)}
+            { this.state.ready ? (<Route exact path='/' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={ this.state.profile } /> } />) : (<DimLoader />)}
             <Route exact path='/cart' render={
                 (props) => (<Cart cartItems={ this.state.cart } toggleInCart={ this.toggleInCart }/>)
               } />
             <Route exact path='/profile' render={
-                (props) => (<Profile />)
+                (props) => (<Profile requestUserProfileEdit={ this.requestUserProfileEdit }/>)
               } />
           </Switch>
         </div>

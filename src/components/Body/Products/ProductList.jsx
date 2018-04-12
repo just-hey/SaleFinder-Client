@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Card, Image, Item, List, Transition } from 'semantic-ui-react'
 import ProductTile from './ProductTile'
+import './Products.css'
 
 const ProductList = ({ products, toggleInCart, user_id }) => {
   return (
