@@ -1,3 +1,20 @@
+#allProductsList {
+  height: 100vh;
+}
+
+.navBarGap {
+  margin-top: 6rem;
+  background-color: #f7f6f2;
+}
+
+.bannerGap {
+  margin-top: 10rem;
+}
+
+.likeToAdd {
+  margin: 3rem;
+}
+
 .ui.basic.button.removeListBtn {
   background-color: pink !important;
   color: #485665 !important;
@@ -12,8 +29,4 @@
   padding: 10px;
   margin: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-#allProductsList {
-  height: 100vh;
 }

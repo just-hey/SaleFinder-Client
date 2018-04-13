@@ -13,7 +13,6 @@
 
 .ui.buttons:not(.basic):not(.inverted)>.button, .ui.buttons>.ui.button:not(.basic):not(.inverted) {
   background-color: #1B9AAA;
-
 }
 
 .ui.teal.button {

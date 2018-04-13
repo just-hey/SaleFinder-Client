@@ -70,7 +70,7 @@ class App extends Component {
   }
 
   filterProductList = async (products, searchValue) => {
-    if (searchValue) {
+    if (searchValue.length !== 0) {
       await products.forEach(product => {
         if (product.name.toLowerCase().includes(searchValue.toLowerCase())) {
           product.isVisible = true
@@ -166,6 +166,7 @@ class App extends Component {
   }
 
   viewHome = (history) => {
+    //remove value in state
     return () => history.push('/')
   }
 
@@ -180,7 +181,7 @@ class App extends Component {
           { this.state.isLoggedIn ? (
             <NavBar products={ this.state.products } profile={ this.state.profile } cart={ this.state.cart } isLoggedIn={ this.state.isLoggedIn } viewProfile={ this.viewProfile } viewCart={ this.viewCart } viewHome={ this.viewHome } signOut={ this.signOut } setUpState={ this.setUpState } />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
           <Switch>
-            { this.state.ready ? (<Route exact path='/' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={ this.state.profile } searchValue={ this.state.value }/> } />) : (<DimLoader />)}
+            { this.state.ready ? (<Route exact path='/' render={ (props) => <ProductList { ...props } isLoggedIn={ this.state.isLoggedIn } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={ this.state.profile } searchValue={ this.state.value }/> } />) : (<DimLoader />)}
             <Route exact path='/cart' render={
                 (props) => (<Cart cartItems={ this.state.cart } toggleInCart={ this.toggleInCart }/>)
               } />

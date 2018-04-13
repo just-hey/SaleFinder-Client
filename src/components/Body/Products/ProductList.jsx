@@ -4,9 +4,9 @@ import ProductTile from './ProductTile'
 import AddMissing from './AddMissing'
 import './Products.css'
 
-const ProductList = ({ products, toggleInCart, user_id, searchValue }) => {
+const ProductList = ({ isLoggedIn, products, toggleInCart, user_id, searchValue }) => {
   return (
-    <div id='allProductsList'>
+    <div id='allProductsList' className={ isLoggedIn ? 'navBarGap' : 'bannerGap' }>
       <Card.Group centered >
 
         { products.map((product, i) => <ProductTile key={ i } product={ product } toggleInCart={ toggleInCart } user_id={ user_id } />) }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Responsive, Transition, Segment, Header } from 'semantic-ui-react'
+import { Button, Responsive, Transition, Segment, Header, Menu } from 'semantic-ui-react'
 import Register from './Register'
 import Login from './Login'
 import './Banner.css'
@@ -9,6 +9,7 @@ const Banner = ({ register, login }) => {
     <div>
       <Responsive { ...Responsive.onlyComputer }>
         <Transition transitionOnMount animation='fade down' duration={1500}>
+          <Menu fixed='top'>
           <Segment id='banner' >
             <Header as='h3' textAlign='justified'>
               INFO ABOUT THINGS AND STUFF
@@ -21,6 +22,7 @@ const Banner = ({ register, login }) => {
               </Button.Group>
             </Header>
           </Segment>
+        </Menu>
         </Transition>
       </Responsive>
 
