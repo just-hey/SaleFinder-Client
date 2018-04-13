@@ -1,62 +1,33 @@
-import _ from 'lodash'
-import $ from 'jquery'
 import React, { Component } from 'react'
-import { Sidebar, Segment, Button, Grid, Search, Menu, Image, Icon, Header } from 'semantic-ui-react'
-
-
-let products
+import { Button, Input } from 'semantic-ui-react'
 
 class SearchBar extends Component {
   constructor(props) {
-    super(props)
-  }
+     super(props)
+     this.state = {
+         value: '',
+         send: false,
+         sendValue: ''
+     }
+   }
 
+   onButtonClick = () => {
+       this.setState({
+           send: !this.state.send,
+           sendValue: this.state.value
+       })
+       this.props.setUpState(this.props.profile, this.props.cart, this.props.products, this.props.isLoggedIn, this.state.value)
+   }
 
-  componentWillMount() {
-    if (this.props.products) products = this.props.products
-    this.setState({ products: products })
-    this.resetComponent()
-  }
-
-  resetComponent = () => this.setState({ isLoading: false, results: [], value: '', products })
-
-  handleResultSelect = (e, { result }) => {
-    this.setState({ value: result.name })
-  }
-
-  toggleVisibility = () => {
-    this.state.visible ? $('#hiddenPusher').removeClass('hiddenPusher') : $('#hiddenPusher').addClass('hiddenPusher')
-    this.setState({ visible: !this.state.visible })
-  }
-
-  handleSearchChange = (e, { value }) => {
-    this.setState({ isLoading: true, value })
-    setTimeout(() => {
-      if (this.state.value.length < 1) return this.resetComponent()
-
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result.name)
-      this.setState({
-        isLoading: false,
-        results: _.filter(this.props.products, isMatch),
-      })
-    }, 300)
+  enteredValue = (e) => {
+    this.setState({ value: e.target.value })
   }
 
   render() {
-    const { isLoading, value, results, visible } = this.state
     return (
       <div>
-        <Search
-          fixed='true'
-          aligned='right'
-          loading={ isLoading }
-          onResultSelect={ this.handleResultSelect }
-          onSearchChange={ _.debounce(this.handleSearchChange, 500, { leading: true }) }
-          results={ results }
-          value={ value }
-          { ...this.props }
-        />
+        <Input onChange={(e) => this.enteredValue(e)}/>
+        <Button emphasis="primary" onClick={this.onButtonClick}>Search</Button>
       </div>
     )
   }

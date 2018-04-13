@@ -69,6 +69,20 @@ class App extends Component {
     }
   }
 
+  filterProductList = async (products, searchValue) => {
+    if (searchValue) {
+      await products.forEach(product => {
+        if (product.name.toLowerCase().includes(searchValue.toLowerCase())) {
+          product.isVisible = true
+        } else {
+          product.isVisible = false
+        }
+        return product
+      })
+    }
+    return products
+  }
+
   registerNewUser = async (first_name, zip, phone, password) => {
     let body = { first_name, zip, phone, password }
     return axios.post(`${baseURL}users/signup`, body)
@@ -91,7 +105,6 @@ class App extends Component {
   }
 
   requestUserProfileEdit = (first_name, zip, phone, password) => {
-    //build body out of info to be changed use spread on state.profile {...}?
     let id = this.state.profile.id
     let body = { first_name, zip, phone, password }
     let token = localStorage.getItem('token')
@@ -113,7 +126,8 @@ class App extends Component {
       })
   }
 
-  setUpState = async (profile, cart, products, isLoggedIn) => {
+  setUpState = async (profile, cart, products, isLoggedIn, searchValue) => {
+    if (searchValue) await this.filterProductList(products, searchValue)
     await products.forEach(product => {
       product.inCart = false
       return cart.forEach(cartItem => {
@@ -123,25 +137,26 @@ class App extends Component {
         }
       })
     })
-    this.setState({ isLoggedIn, profile, cart, products, ready: true })
+    this.setState({ isLoggedIn, profile, cart, products, ready: true, value: searchValue })
   }
 
   signOut = () => {
     localStorage.removeItem('token')
     this.setState({ isLoggedIn: false, profile: null, cart: [], products: [] })
+    window.location.replace(`${process.env.HOME_URL}`)
     this.componentWillMount()
   }
 
-  toggleInCart = async (e, id) => {
+  toggleInCart = async (e, searchValue) => {
     e.preventDefault()
     let user_id = await this.state.profile.id
-    let body = { product_id: id, user_id }
+    let body = { user_id, productString: searchValue }
     return axios.post(`${baseURL}carts/change`, body)
       .then( async (response) => {
         let profile = await this.state.profile
         let newCart = await response.data.cart
         let products = await this.state.products
-        let isLoggedIn = await true
+        let isLoggedIn = true
         return this.setUpState(profile, newCart, products, isLoggedIn)
       })
   }
@@ -162,9 +177,10 @@ class App extends Component {
     return (
       <Router>
         <div className='App container'>
-          { this.state.isLoggedIn ? (<NavBar products={ this.state.products } isLoggedIn={ this.state.isLoggedIn } viewProfile={ this.viewProfile } viewCart={ this.viewCart } viewHome={ this.viewHome } signOut={ this.signOut } />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
+          { this.state.isLoggedIn ? (
+            <NavBar products={ this.state.products } profile={ this.state.profile } cart={ this.state.cart } isLoggedIn={ this.state.isLoggedIn } viewProfile={ this.viewProfile } viewCart={ this.viewCart } viewHome={ this.viewHome } signOut={ this.signOut } setUpState={ this.setUpState } />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
           <Switch>
-            { this.state.ready ? (<Route exact path='/' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={ this.state.profile } /> } />) : (<DimLoader />)}
+            { this.state.ready ? (<Route exact path='/' render={ (props) => <ProductList { ...props } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={ this.state.profile } searchValue={ this.state.value }/> } />) : (<DimLoader />)}
             <Route exact path='/cart' render={
                 (props) => (<Cart cartItems={ this.state.cart } toggleInCart={ this.toggleInCart }/>)
               } />

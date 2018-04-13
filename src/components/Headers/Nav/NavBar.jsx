@@ -11,7 +11,7 @@ class NavBar extends Component {
   }
 
   render() {
-    const { products, viewProfile, viewHome, viewCart, history, signOut } = this.props
+    const { products, viewProfile, viewHome, viewCart, history, signOut, profile, cart, isLoggedIn, setUpState } = this.props
     return (
       <div>
           <Responsive { ...Responsive.onlyComputer }>
@@ -23,7 +23,7 @@ class NavBar extends Component {
                   </Menu.Item>
                   <Menu.Menu position='right'>
                     <Menu.Item>
-                      <SearchBar products={ products }/>
+                      <SearchBar products={ products } profile={ profile } cart={ cart } isLoggedIn={ isLoggedIn } setUpState={ setUpState } />
                     </Menu.Item>
                     <Menu.Item>
                       <Dropdown>
@@ -47,7 +47,7 @@ class NavBar extends Component {
                   </Menu.Item>
                   <Menu.Menu position='right'>
                     <Menu.Item>
-                      <SearchBar products={ products }/>
+                      <SearchBar products={ products } profile={ profile } cart={ cart } isLoggedIn={ isLoggedIn } setUpState={ setUpState } />
                       <Dropdown>
 
                         <DropDown viewProfile={ viewProfile(history) } viewCart={ viewCart(history) } signOut={ signOut } />
@@ -67,18 +67,16 @@ class NavBar extends Component {
                   <Menu.Item as='a' onClick={ viewHome(history) } header>
                     S.F.
                   </Menu.Item>
-                    <Menu.Item>
+                  <Menu.Item>
+                    <SearchBar products={ products } profile={ profile } cart={ cart } isLoggedIn={ isLoggedIn } setUpState={ setUpState } />
+                  </Menu.Item>
+                  <Menu.Item>
+                    <Dropdown>
 
-                      <SearchBar products={ products }/>
+                      <DropDown viewProfile={ viewProfile(history) } viewCart={ viewCart(history) } signOut={ signOut } />
 
-                    </Menu.Item>
-                    <Menu.Item>
-                      <Dropdown direction='left'>
-
-                        <DropDown viewProfile={ viewProfile(history) } viewCart={ viewCart(history) } signOut={ signOut } />
-
-                      </Dropdown>
-                    </Menu.Item>
+                    </Dropdown>
+                  </Menu.Item>
                 </Container>
               </Menu>
             </Transition>
