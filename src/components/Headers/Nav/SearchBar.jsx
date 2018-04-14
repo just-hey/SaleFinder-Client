@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Button, Input } from 'semantic-ui-react'
+import { Button, Input, Icon } from 'semantic-ui-react'
+import './NavBar.css'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -26,8 +27,10 @@ class SearchBar extends Component {
   render() {
     return (
       <div>
-        <Input onChange={(e) => this.enteredValue(e)}/>
-        <Button emphasis="primary" onClick={this.onButtonClick}>Search</Button>
+        <Input className='prompt ui icon input' placeholder='Search...' type='text' onChange={(e) => this.enteredValue(e)}/>
+        <Icon.Group size='large'>
+          <Icon className='searchButtonIcon' name='search' link circular inverted={true} onClick={this.onButtonClick} />
+        </Icon.Group>
       </div>
     )
   }

@@ -6,6 +6,11 @@
   color: #050505;
 }
 
+.ui.centered {
+  background: linear-gradient(#F7F6F2, #485665);
+}
+
+
 .ui.basic.button {
   width: 80%;
   margin: 1rem 0;

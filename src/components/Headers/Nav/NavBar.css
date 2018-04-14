@@ -1,0 +1,25 @@
+.ui.top {
+  background: #F7F6F2;
+  color: #050505;
+}
+
+.ui.button {
+  background-color: #1B9AAA;
+}
+
+.dropDownTrigger {
+  margin-left: 10px;
+}
+
+.prompt.ui.icon.input {
+  margin-top: 7px !important;
+}
+
+.helpButtonIcon {
+  margin: 10px 15px 5px 5px !important;
+  color: #1B9AAA;
+}
+
+.searchButtonIcon {
+  margin: 1px 10px 5px 10px !important;
+}
