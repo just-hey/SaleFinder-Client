@@ -24,7 +24,7 @@ class Profile extends Component {
         <Form centered className='userInfoForm profileContainer' onSubmit={this.handleSubmit}>
 
           <Form.Group widths='2'>
-             <Form.Input label='First name' placeholder='First name' />
+             <Form.Input label='Name' placeholder='Name' />
              <Form.Input label='Phone' placeholder='Phone' />
            </Form.Group>
            <Form.Group widths='2'>

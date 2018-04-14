@@ -2,6 +2,10 @@
   height: 100vh;
 }
 
+.addCartPrompt {
+  background: linear-gradient(#485665, #F7F6F2);
+}
+
 .navBarGap {
   padding: 5rem 0;
   background-color: #f7f6f2;

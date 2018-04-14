@@ -13,7 +13,7 @@ const ProductList = ({ isLoggedIn, products, toggleInCart, user_id, searchValue 
 
       </Card.Group>
 
-      <Card.Group>
+      <Card.Group className='addCartPrompt'>
         { searchValue ? <AddMissing toggleInCart={ toggleInCart } searchValue={ searchValue } /> : ''}
       </Card.Group>
 
