@@ -11,7 +11,7 @@
   color: red;
 }
 
-i.inverted.bordered.icon, i.inverted.circular.icon {
+.i.inverted.bordered.icon, i.inverted.circular.icon {
   background-color: #1b9aaa !important;
 
 }
