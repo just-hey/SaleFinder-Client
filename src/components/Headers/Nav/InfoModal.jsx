@@ -7,7 +7,6 @@ class Register extends Component {
     super(props)
   }
 
-
   render() {
     return (
       <Modal trigger={
