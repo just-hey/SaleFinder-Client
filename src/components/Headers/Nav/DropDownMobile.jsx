@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button, Dropdown, Icon, Modal, Header } from 'semantic-ui-react'
-import InfoModal from './InfoModal'
+import { Dropdown, Icon, Modal, Header } from 'semantic-ui-react'
 
 const DropDownMobile = ({ viewHome, viewProfile, viewCart, signOut, open, triggerModal }) => {
 

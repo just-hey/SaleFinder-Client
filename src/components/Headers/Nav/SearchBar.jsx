@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Input, Icon } from 'semantic-ui-react'
+import { Input, Icon } from 'semantic-ui-react'
 import './NavBar.css'
 
 class SearchBar extends Component {

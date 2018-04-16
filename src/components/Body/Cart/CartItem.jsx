@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Grid, Icon, List, Item, Button, Image, Transition } from 'semantic-ui-react'
-import RemoveFromList from './RemoveFromList'
+import { Button, Grid, Icon, Transition } from 'semantic-ui-react'
 
 class CartItem extends Component {
   constructor(props) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Card } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import ProductTile from '../Products/ProductTile'
 
 const RemoveFromList = ({ product_id, toggleInCart }) => {

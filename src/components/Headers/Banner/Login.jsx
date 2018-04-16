@@ -16,13 +16,7 @@ class Login extends Component {
 
   handleSubmit = async () => {
     const { phone, password } = this.state
-    console.log(phone, password)
     await this.props.login( phone, password )
-    // if (result.status == 201) {
-    //   this.displayResults('Welcome back!')
-    // } else {
-    // if(result) this.displayResults(result.data.message)
-    // }
   }
 
   displayResults = (message) => {

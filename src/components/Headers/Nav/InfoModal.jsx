@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment, Modal, Icon, Transition } from 'semantic-ui-react'
+import { Header, Modal, Icon } from 'semantic-ui-react'
 
 class Register extends Component {
-
-  constructor (props) {
-    super(props)
-  }
-
   render() {
     return (
       <Modal trigger={

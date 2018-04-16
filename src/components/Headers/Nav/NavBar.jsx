@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Image, Menu, Dropdown, Header, Responsive, Sidebar, Icon, Segment, Button, Transition } from 'semantic-ui-react'
+import { Menu, Responsive, Transition } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
 import DropDown from './DropDown'
 import SearchBar from './SearchBar'
-import Register from '../Banner/Register'
-import { withRouter } from 'react-router-dom'
 import InfoModal from './InfoModal'
 import DropDownMobile from './DropDownMobile'
 

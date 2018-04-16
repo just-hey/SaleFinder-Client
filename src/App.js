@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import { HashRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css'
 import axios from 'axios'
 
 // ---- Components ----
 import NavBar from './components/Headers/Nav/NavBar'
 import Banner from './components/Headers/Banner/Banner'
-import Register from './components/Headers/Banner/Register'
-import SearchBar from './components/Headers/Nav/SearchBar'
 import Cart from './components/Body/Cart/Cart'
 import ProductList from './components/Body/Products/ProductList'
 import DimLoader from './components/Body/DimLoader'
@@ -59,7 +57,9 @@ class App extends Component {
   checkForToken = () => {
     if (localStorage.getItem('token')) {
       return this.requestUserProfile()
-        .then(user => this.setUpState(user.response, user.cart, user.products, true))
+        .then(user => {
+          this.setUpState(user.response, user.cart, user.products, true)
+        })
         .catch(console.error)
     } else {
       return this.requestProducts('local')
@@ -127,15 +127,6 @@ class App extends Component {
 
   setUpState = async (profile, cart, products, isLoggedIn, searchValue) => {
     if (searchValue) await this.filterProductList(products, searchValue)
-    await products.forEach(product => {
-      product.inCart = false
-      return cart.forEach(cartItem => {
-        if(cartItem.product_id === product.id) {
-          product.inCart = true
-          return product
-        }
-      })
-    })
     this.setState({ isLoggedIn, profile, cart, products, ready: true, value: searchValue })
   }
 
@@ -148,9 +139,10 @@ class App extends Component {
 
   toggleInCart = async (e, searchValue) => {
     e.preventDefault()
+    let token = localStorage.getItem('token')
     let user_id = await this.state.profile.id
     let body = { user_id, productString: searchValue }
-    return axios.post(`${baseURL}carts/change`, body)
+    return axios.post(`${baseURL}carts/change`, body, { headers: { authorization: `Bearer ${token}` }})
       .then( async (response) => {
         let profile = await this.state.profile
         let newCart = await response.data.cart
@@ -165,7 +157,6 @@ class App extends Component {
   }
 
   viewHome = (history) => {
-    //remove value in state
     return () => history.push('/')
   }
 
@@ -185,7 +176,7 @@ class App extends Component {
                 (props) => (<Cart cartItems={ this.state.cart } toggleInCart={ this.toggleInCart }/>)
               } />
             <Route exact path='/profile' render={
-                (props) => (<Profile requestUserProfileEdit={ this.requestUserProfileEdit }/>)
+                (props) => (<Profile profile={this.state.profile} requestUserProfileEdit={ this.requestUserProfileEdit }/>)
               } />
           </Switch>
         </div>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment, Modal, Transition } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment, Modal, Transition } from 'semantic-ui-react'
 import Login from './Login'
 import axios from 'axios'
+
+const scrapeURL = `http://localhost:8002/scrape/`
 
 class Register extends Component {
 
@@ -29,11 +31,9 @@ class Register extends Component {
     }
   }
 
-
   scrapeTrigger = async () => {
     let zip = await this.state.zip
-    // return axios.get(`http://localhost:8002/scrape/${zip}`)
-    return axios.get(`${process.env.SCRAPE_URL}${zip}`)
+    return axios.get(`${scrapeURL}${zip}`)
 
   }
 
