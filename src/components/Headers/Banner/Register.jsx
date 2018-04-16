@@ -32,7 +32,9 @@ class Register extends Component {
 
   scrapeTrigger = async () => {
     let zip = await this.state.zip
-    return axios.get(`http://localhost:8002/scrape/${zip}`)
+    // return axios.get(`http://localhost:8002/scrape/${zip}`)
+    return axios.get(`${process.env.SCRAPE_URL}${zip}`)
+
   }
 
   displayResults = (message) => {

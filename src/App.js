@@ -14,6 +14,7 @@ import DimLoader from './components/Body/DimLoader'
 import Profile from './components/Body/Profile/Profile'
 
 const baseURL = `http://localhost:3000/`
+// const baseURL = `https://salefinder-server.herokuapp.com/`
 
 class App extends Component {
   constructor(props) {
@@ -58,10 +59,8 @@ class App extends Component {
   checkForToken = () => {
     if (localStorage.getItem('token')) {
       return this.requestUserProfile()
-      .then(user => {
-        return this.setUpState(user.response, user.cart, user.products, true)
-      })
-      .catch(console.error)
+        .then(user => this.setUpState(user.response, user.cart, user.products, true))
+        .catch(console.error)
     } else {
       return this.requestProducts('local')
         .then(products => this.setUpState(null, [], products, false))
