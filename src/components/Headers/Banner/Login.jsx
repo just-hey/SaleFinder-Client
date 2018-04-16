@@ -17,23 +17,12 @@ class Login extends Component {
   handleSubmit = async () => {
     const { phone, password } = this.state
     await this.props.login( phone, password )
+    console.log('after submit? in login.jsx...')
   }
-
-  displayResults = (message) => {
-    // this.setState({ resultMessage: message })
-    // //need to fade in and then fade out
-    //
-    // if (message == 'Welcome back!') {
-    //   //meaning registering was a success
-    //     //run login()
-    // } else {
-    //   //meaning it was a fail, fade away error message and wait for another attempt.
-    // }
-  }
-
 
   render() {
     const { phone, password } = this.state
+    const { register} = this.props
     return (
       <Modal trigger={ <a>Log in</a> } closeIcon>
         <Transition animation='fade'>
@@ -78,7 +67,7 @@ class Login extends Component {
                   {this.state.resultMessage}
                 </Message.Header>
                 <Message>
-                  Not a user? <Register register={ this.props.register } />
+                  Not a user? <Register register={ register } />
                 </Message>
               </Grid.Column>
             </Grid>

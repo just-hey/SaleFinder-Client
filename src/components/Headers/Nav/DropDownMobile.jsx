@@ -8,7 +8,7 @@ const DropDownMobile = ({ viewHome, viewProfile, viewCart, signOut, open, trigge
     { key: 'user', text: 'Profile', icon: 'user', onClick: viewProfile },
     { key: 'cart', text: 'Cart', icon: 'cart', onClick: viewCart },
     { key: 'sign-out', text: 'Sign Out', icon: 'sign out', onClick: signOut },
-    { key: 'help', text: 'help', icon: 'help circle', onClick: triggerModal }
+    { key: 'info', text: 'Info', icon: 'info', onClick: triggerModal }
   ]
 
   return (

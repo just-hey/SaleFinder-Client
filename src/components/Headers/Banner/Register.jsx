@@ -38,12 +38,14 @@ class Register extends Component {
   }
 
   displayResults = (message) => {
-    this.setState({ resultMessage: message })
     if (message === 'Thank you for registering!') {
-        this.scrapeTrigger()
-          .then(() => true)
-          .catch(console.error)
+      this.setState({ resultMessage: message })
+      this.scrapeTrigger()
+        .then(() => true)
+        .catch(console.error)
     } else {
+      this.setState({ resultMessage: message })
+      console.log('register fail message... ',message)
       //meaning it was a fail, fade away error message and wait for another attempt.
     }
   }

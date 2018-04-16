@@ -40,13 +40,8 @@ class App extends Component {
     let body = { phone, password }
     return axios.post(`${baseURL}users/login`, body)
       .then(response => {
-        this.setState({ ready: false })
-        let userId = response.data.id
-        let cart = response.data.cart
-        let productsListCopy = this.state.products
         let token = response.headers.auth.split(' ')[1]
         localStorage.setItem('token', token)
-        this.setUpState(userId, cart, productsListCopy)
         this.checkForToken()
       })
       .catch(err => {
@@ -58,7 +53,8 @@ class App extends Component {
     if (localStorage.getItem('token')) {
       return this.requestUserProfile()
         .then(user => {
-          this.setUpState(user.response, user.cart, user.products, true)
+          this.setState({ products: [] })
+          this.setUpState(user.response, user.cart, user.products, true, null)
         })
         .catch(console.error)
     } else {
@@ -104,15 +100,16 @@ class App extends Component {
   }
 
   requestUserProfileEdit = (first_name, zip, phone, password) => {
-    let id = this.state.profile.id
-    let body = { first_name, zip, phone, password }
-    let token = localStorage.getItem('token')
-    return axios.put(`${baseURL}users/${id}`, { headers: { authorization: `Bearer ${token}` }, body })
-      .then(requestedProfile => requestedProfile.data)
-      .catch(err => {
-        localStorage.removeItem('token')
-        this.checkForToken()
-      })
+    console.log('clicked');
+    // let id = this.state.profile.id
+    // let body = { first_name, zip, phone, password }
+    // let token = localStorage.getItem('token')
+    // return axios.patch(`${baseURL}users/${id}`, body, { headers: { authorization: `Bearer ${token}` } })
+    //   .then(requestedProfile => requestedProfile.data)
+    //   .catch(err => {
+    //     localStorage.removeItem('token')
+    //     this.checkForToken()
+    //   })
   }
 
   requestUserProfile = () => {

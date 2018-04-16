@@ -6,7 +6,7 @@ class Register extends Component {
     return (
       <Modal trigger={
         <Icon.Group size='large'>
-          <Icon name='help circle' className='helpButtonIcon' size='large' link />
+          <Icon name='info' inverted circular className='helpButtonIcon' size='small' link />
         </Icon.Group>
       } closeIcon>
         <Header icon='archive' content='About how we work' />

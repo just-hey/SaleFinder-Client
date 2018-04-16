@@ -12,13 +12,13 @@ class SearchBar extends Component {
      }
    }
 
-   onButtonClick = () => {
-       this.setState({
-           send: !this.state.send,
-           sendValue: this.state.value
-       })
-       this.props.setUpState(this.props.profile, this.props.cart, this.props.products, this.props.isLoggedIn, this.state.value)
-   }
+  onButtonClick = (e) => {
+    e.preventDefault()
+    let valueSave = this.state.value
+    this.setState({ value: '' })
+    this.props.setUpState(this.props.profile, this.props.cart, this.props.products, this.props.isLoggedIn, valueSave)
+
+  }
 
   enteredValue = (e) => {
     this.setState({ value: e.target.value })
@@ -27,9 +27,9 @@ class SearchBar extends Component {
   render() {
     return (
       <div>
-        <Input className='prompt ui icon input' placeholder='Search...' type='text' onChange={(e) => this.enteredValue(e)}/>
+        <Input className='prompt ui icon input' placeholder='Search...' type='text' onChange={this.enteredValue}/>
         <Icon.Group size='large'>
-          <Icon className='searchButtonIcon' name='search' link circular inverted={true} onClick={this.onButtonClick} />
+          <Icon className='searchButtonIcon' name='search' link circular inverted={true} onClick={(e) => this.onButtonClick(e)} />
         </Icon.Group>
       </div>
     )
