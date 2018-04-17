@@ -6,6 +6,12 @@
   background: linear-gradient(#485665, #F7F6F2);
 }
 
+.productCards {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
 .navBarGap {
   padding: 5rem 0;
   background-color: #f7f6f2;

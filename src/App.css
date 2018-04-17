@@ -34,11 +34,11 @@
 a {
   color: #050505 !important;
 }
-.productCards {
+/* .productCards {
   display: flex !important;
   flex-direction: column !important;
-  justify-content: flex-end !important;
-}
+  justify-content: space-between !important;
+} */
 
 .ui.header {
   color: #050505;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Image, Transition, Header } from 'semantic-ui-react'
+import './Products.css'
 
 class ProductTile extends Component {
   constructor(props) {

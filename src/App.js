@@ -154,6 +154,10 @@ class App extends Component {
   }
 
   viewHome = (history) => {
+    // let { profile, newCart, products, isLoggedIn } = this.state
+    // this.setState({ profile, cart: newCart , products, isLoggedIn: true, ready:true, searchValue: ' ' })
+    // console.log(this.state)
+
     return () => history.push('/')
   }
 
