@@ -11,8 +11,8 @@ import ProductList from './components/Body/Products/ProductList'
 import DimLoader from './components/Body/DimLoader'
 import Profile from './components/Body/Profile/Profile'
 
-const baseURL = `http://localhost:3000/`
-// const baseURL = `https://salefinder-server.herokuapp.com/`
+// const baseURL = `http://localhost:3000/`
+const baseURL = `https://salefinder-server.herokuapp.com/`
 
 class App extends Component {
   constructor(props) {

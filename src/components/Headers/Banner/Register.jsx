@@ -3,7 +3,8 @@ import { Button, Form, Grid, Header, Message, Segment, Modal, Transition } from 
 import Login from './Login'
 import axios from 'axios'
 
-const scrapeURL = `http://localhost:8002/scrape/`
+// const scrapeURL = `http://localhost:8002/scrape/`
+const scrapeURL = `https://crawler-scrape.herokuapp.com/scrape/`
 
 class Register extends Component {
 
