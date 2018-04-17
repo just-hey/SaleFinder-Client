@@ -10,6 +10,7 @@ import Cart from './components/Body/Cart/Cart'
 import ProductList from './components/Body/Products/ProductList'
 import DimLoader from './components/Body/DimLoader'
 import Profile from './components/Body/Profile/Profile'
+import Splash from './components/Headers/Nav/Splash'
 
 // const baseURL = `http://localhost:3000/`
 const baseURL = `https://salefinder-server.herokuapp.com/`
@@ -38,6 +39,7 @@ class App extends Component {
 
   attemptLogUserIn = (phone, password) => {
     let body = { phone, password }
+    console.log(body)
     return axios.post(`${baseURL}users/login`, body)
       .then(response => {
         let token = response.headers.auth.split(' ')[1]
@@ -50,6 +52,7 @@ class App extends Component {
   }
 
   checkForToken = () => {
+    console.log('token check');
     if (localStorage.getItem('token')) {
       return this.requestUserProfile()
         .then(user => {
@@ -122,7 +125,7 @@ class App extends Component {
       })
   }
 
-  setUpState = async (profile, cart, products, isLoggedIn, searchValue) => {
+  setUpState = async (profile, cart, products, isLoggedIn, searchValue=' ') => {
     if (searchValue) await this.filterProductList(products, searchValue)
     this.setState({ isLoggedIn, profile, cart, products, ready: true, value: searchValue })
   }
@@ -157,7 +160,6 @@ class App extends Component {
     // let { profile, newCart, products, isLoggedIn } = this.state
     // this.setState({ profile, cart: newCart , products, isLoggedIn: true, ready:true, searchValue: ' ' })
     // console.log(this.state)
-
     return () => history.push('/')
   }
 
@@ -170,14 +172,26 @@ class App extends Component {
       <Router>
         <div className='App container'>
           { this.state.isLoggedIn ? (
-            <NavBar products={ this.state.products } profile={ this.state.profile } cart={ this.state.cart } isLoggedIn={ this.state.isLoggedIn } viewProfile={ this.viewProfile } viewCart={ this.viewCart } viewHome={ this.viewHome } signOut={ this.signOut } setUpState={ this.setUpState } />) : (<Banner register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
+            <NavBar products={ this.state.products } profile={ this.state.profile } cart={ this.state.cart } isLoggedIn={ this.state.isLoggedIn } viewProfile={ this.viewProfile } viewCart={ this.viewCart } viewHome={ this.viewHome } signOut={ this.signOut } setUpState={ this.setUpState } />) : (<Splash register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
           <Switch>
-            { this.state.ready ? (<Route exact path='/' render={ (props) => <ProductList { ...props } isLoggedIn={ this.state.isLoggedIn } products={ this.state.products } toggleInCart={ this.toggleInCart } user_id={ this.state.profile } searchValue={ this.state.value }/> } />) : (<DimLoader />)}
+            <Route exact path='/' render={
+              (props) => <ProductList
+                { ...props }
+                isLoggedIn={ this.state.isLoggedIn }
+                products={ this.state.products }
+                toggleInCart={ this.toggleInCart }
+                user_id={ this.state.profile }
+                searchValue={ this.state.value }/>
+              } />
             <Route exact path='/cart' render={
-                (props) => (<Cart cartItems={ this.state.cart } toggleInCart={ this.toggleInCart }/>)
+                (props) => (<Cart
+                  cartItems={ this.state.cart }
+                  toggleInCart={ this.toggleInCart }/>)
               } />
             <Route exact path='/profile' render={
-                (props) => (<Profile profile={this.state.profile} requestUserProfileEdit={ this.requestUserProfileEdit }/>)
+                (props) => (<Profile
+                  profile={this.state.profile}
+                  requestUserProfileEdit={ this.requestUserProfileEdit }/>)
               } />
           </Switch>
         </div>

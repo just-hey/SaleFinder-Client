@@ -53,10 +53,8 @@ class Register extends Component {
 
   render() {
     const { name, zip, phone, password } = this.state
-    const { register, login } = this.props
+    const { register } = this.props
     return (
-      <Modal trigger={ <a>Register</a> } closeIcon>
-        <Transition animation='fade'>
           <div className='login-form'>
             <Grid
               textAlign='center'
@@ -69,7 +67,6 @@ class Register extends Component {
                 </Header>
                 <Form size='large' onSubmit={this.handleSubmit}>
                   <Segment stacked>
-                    {/* first_name, zip, phone, password */}
                       <Form.Input
                         name='name'
                         value={name}
@@ -116,14 +113,9 @@ class Register extends Component {
                 <Message.Header >
                   {this.state.resultMessage}
                 </Message.Header>
-                <Message>
-                  Already a user? <Login login={ this.props.login } />
-                </Message>
               </Grid.Column>
             </Grid>
           </div>
-        </Transition>
-      </Modal>
     )
   }
 
