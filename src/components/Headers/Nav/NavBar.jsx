@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Menu, Responsive, Transition } from 'semantic-ui-react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import DropDown from './DropDown'
 import SearchBar from './SearchBar'
 import InfoModal from './InfoModal'
@@ -61,6 +61,8 @@ class NavBar extends Component {
             <div>
               <Menu borderless fixed='top'>
                 <DropDownMobile viewHome={ viewHome(history) } viewProfile={ viewProfile(history) } viewCart={ viewCart(history) } signOut={ signOut } triggerModal={ this.toggleModal } open={ this.state.isOpen }/>
+                {/* <Menu.Item as={ Link } to='/' name='Home' />
+                <Menu.Item as={ Link } to='/cart' name='Cart' /> */}
                 <Menu.Menu position='right'>
                   <SearchBar className='ui transparent icon input' products={ products } profile={ profile } cart={ cart } isLoggedIn={ isLoggedIn } setUpState={ setUpState } />
                 </Menu.Menu>

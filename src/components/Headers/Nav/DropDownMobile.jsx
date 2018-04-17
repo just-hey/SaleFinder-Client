@@ -1,5 +1,6 @@
 import React from 'react'
 import { Dropdown, Icon, Modal, Header } from 'semantic-ui-react'
+import { withRouter, Link } from 'react-router-dom'
 
 const DropDownMobile = ({ viewHome, viewProfile, viewCart, signOut, open, triggerModal }) => {
 

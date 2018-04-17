@@ -12,6 +12,10 @@ class SearchBar extends Component {
      }
    }
 
+  componentDidMount() {
+    
+  }
+
   onButtonClick = (e) => {
     e.preventDefault()
     let valueSave = this.state.value
@@ -27,7 +31,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div>
-        <Input className='prompt ui icon input' placeholder='Search...' type='text' onChange={this.enteredValue}/>
+        <Input className='prompt ui icon input' placeholder='Search...' type='text' value={this.state.value} onChange={this.enteredValue}/>
         <Icon.Group size='large'>
           <Icon className='searchButtonIcon' name='search' link circular inverted={true} onClick={(e) => this.onButtonClick(e)} />
         </Icon.Group>
