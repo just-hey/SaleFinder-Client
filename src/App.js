@@ -8,7 +8,6 @@ import NavBar from './components/Headers/Nav/NavBar'
 import Banner from './components/Headers/Banner/Banner'
 import Cart from './components/Body/Cart/Cart'
 import ProductList from './components/Body/Products/ProductList'
-import DimLoader from './components/Body/DimLoader'
 import Profile from './components/Body/Profile/Profile'
 import Splash from './components/Headers/Nav/Splash'
 
@@ -39,7 +38,6 @@ class App extends Component {
 
   attemptLogUserIn = (phone, password) => {
     let body = { phone, password }
-    console.log(body)
     return axios.post(`${baseURL}users/login`, body)
       .then(response => {
         let token = response.headers.auth.split(' ')[1]
@@ -52,7 +50,6 @@ class App extends Component {
   }
 
   checkForToken = () => {
-    console.log('token check');
     if (localStorage.getItem('token')) {
       return this.requestUserProfile()
         .then(user => {
@@ -157,9 +154,6 @@ class App extends Component {
   }
 
   viewHome = (history) => {
-    // let { profile, newCart, products, isLoggedIn } = this.state
-    // this.setState({ profile, cart: newCart , products, isLoggedIn: true, ready:true, searchValue: ' ' })
-    // console.log(this.state)
     return () => history.push('/')
   }
 
@@ -172,7 +166,7 @@ class App extends Component {
       <Router>
         <div className='App container'>
           { this.state.isLoggedIn ? (
-            <NavBar products={ this.state.products } profile={ this.state.profile } cart={ this.state.cart } isLoggedIn={ this.state.isLoggedIn } viewProfile={ this.viewProfile } viewCart={ this.viewCart } viewHome={ this.viewHome } signOut={ this.signOut } setUpState={ this.setUpState } />) : (<Splash register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
+            <NavBar isReady={ this.state.ready } products={ this.state.products } profile={ this.state.profile } cart={ this.state.cart } isLoggedIn={ this.state.isLoggedIn } viewProfile={ this.viewProfile } viewCart={ this.viewCart } viewHome={ this.viewHome } signOut={ this.signOut } setUpState={ this.setUpState } />) : (<Splash register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
           <Switch>
             <Route exact path='/' render={
               (props) => <ProductList

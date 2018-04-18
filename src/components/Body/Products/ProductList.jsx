@@ -6,7 +6,7 @@ import './Products.css'
 
 const ProductList = ({ isLoggedIn, products, toggleInCart, user_id, searchValue }) => {
   return (
-    <div id='allProductsList' className={ isLoggedIn ? 'navBarGap' : 'bannerGap' }>
+    <div id='allProductsList' className='navBarGap'>
       <Card.Group centered >
 
         { products.map((product, i) => <ProductTile key={ i } product={ product } toggleInCart={ toggleInCart } user_id={ user_id } />) }

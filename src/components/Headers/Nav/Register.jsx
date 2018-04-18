@@ -107,10 +107,17 @@ class Register extends Component {
                         placeholder='Password'
                         type='password'
                       />
-                      <Button color='teal' fluid size='large'>Register</Button>
+                      <Button fluid size='large' animated='fade'>
+                        <Button.Content visible>
+                          Register
+                        </Button.Content>
+                        <Button.Content hidden>
+                          REGISTER
+                        </Button.Content>
+                      </Button>
                   </Segment>
                 </Form>
-                <Message.Header >
+                <Message.Header>
                   {this.state.resultMessage}
                 </Message.Header>
               </Grid.Column>

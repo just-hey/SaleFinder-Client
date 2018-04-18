@@ -57,7 +57,14 @@ class Login extends Component {
                         placeholder='Password'
                         type='password'
                       />
-                      <Button color='teal' fluid size='large'>Log in</Button>
+                      <Button fluid size='large' animated='fade'>
+                        <Button.Content visible>
+                          Log in
+                        </Button.Content>
+                        <Button.Content hidden>
+                          LOG IN
+                        </Button.Content>
+                      </Button>
                   </Segment>
                 </Form>
                 <Message.Header >

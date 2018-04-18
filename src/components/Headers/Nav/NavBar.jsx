@@ -5,6 +5,7 @@ import DropDown from './DropDown'
 import SearchBar from './SearchBar'
 import InfoModal from './InfoModal'
 import DropDownMobile from './DropDownMobile'
+import DimLoader from './DimLoader'
 
 import './NavBar.css'
 
@@ -21,7 +22,8 @@ class NavBar extends Component {
   }
 
   render() {
-    const { products, viewProfile, viewHome, viewCart, history, signOut, profile, cart, isLoggedIn, setUpState } = this.props
+    const { isReady, products, viewProfile, viewHome, viewCart, history, signOut, profile, cart, isLoggedIn, setUpState } = this.props
+    console.log(isReady)
     return (
       <div>
         <Responsive { ...Responsive.onlyComputer }>
