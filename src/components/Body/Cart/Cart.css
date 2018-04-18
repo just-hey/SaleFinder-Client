@@ -7,10 +7,6 @@
   width: 50%;
 }
 
-.removeFromCartBtn : hover {
-  color: red;
-}
-
 .i.inverted.bordered.icon{
   background-color: #1b9aaa !important;
 }
