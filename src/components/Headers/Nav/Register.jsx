@@ -55,18 +55,19 @@ class Register extends Component {
     const { name, zip, phone, password } = this.state
     const { register } = this.props
     return (
+      <Modal trigger={ <a>Register</a> } basic size='large' closeIcon>
           <div className='login-form'>
             <Grid
               textAlign='center'
-              style={{ height: '100%' }}
+              style={{ height: '90%' }}
               verticalAlign='middle'
             >
               <Grid.Column style={{ maxWidth: 450 }}>
-                <Header as='h2' textAlign='center'>
-                  Register
-                </Header>
                 <Form size='large' onSubmit={this.handleSubmit}>
                   <Segment stacked>
+                    <Header as='h3' textAlign='center'>
+                      Register
+                    </Header>
                       <Form.Input
                         name='name'
                         value={name}
@@ -107,7 +108,7 @@ class Register extends Component {
                         placeholder='Password'
                         type='password'
                       />
-                      <Button fluid size='large' animated='fade'>
+                      <Button className='removeFromCartBtn' animated='fade' >
                         <Button.Content visible>
                           Register
                         </Button.Content>
@@ -117,12 +118,13 @@ class Register extends Component {
                       </Button>
                   </Segment>
                 </Form>
-                <Message.Header>
+                <Message.Header >
                   {this.state.resultMessage}
                 </Message.Header>
               </Grid.Column>
             </Grid>
           </div>
+      </Modal>
     )
   }
 
