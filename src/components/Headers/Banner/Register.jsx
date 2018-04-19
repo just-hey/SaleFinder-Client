@@ -35,7 +35,6 @@ class Register extends Component {
   scrapeTrigger = async () => {
     let zip = await this.state.zip
     return axios.get(`${scrapeURL}${zip}`)
-
   }
 
   displayResults = (message) => {
@@ -46,8 +45,6 @@ class Register extends Component {
         .catch(console.error)
     } else {
       this.setState({ resultMessage: message })
-      console.log('register fail message... ',message)
-      //meaning it was a fail, fade away error message and wait for another attempt.
     }
   }
 

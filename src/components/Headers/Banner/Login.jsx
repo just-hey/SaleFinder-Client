@@ -17,7 +17,6 @@ class Login extends Component {
   handleSubmit = async () => {
     const { phone, password } = this.state
     await this.props.login( phone, password )
-    console.log('after submit? in login.jsx...')
   }
 
   render() {
@@ -34,12 +33,10 @@ class Login extends Component {
             >
               <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as='h2' textAlign='center'>
-
                   {' '}Log in
                 </Header>
                 <Form size='large' onSubmit={this.handleSubmit}>
                   <Segment stacked>
-
                       <Form.Input
                         name='phone'
                         value={phone}
