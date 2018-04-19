@@ -23,7 +23,6 @@ class NavBar extends Component {
 
   render() {
     const { isReady, products, viewProfile, viewHome, viewCart, history, signOut, profile, cart, isLoggedIn, setUpState } = this.props
-    console.log(isReady)
     return (
       <div>
         <Responsive { ...Responsive.onlyComputer }>

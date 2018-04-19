@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Button, Form, Grid, Image, Header, Message, Segment, Modal, Tab, Transition } from 'semantic-ui-react'
 import Login from './Login'
 import Register from './Register'
-import axios from 'axios'
 import InfoModal from './InfoModal'
+import axios from 'axios'
 
 // const scrapeURL = `http://localhost:8002/scrape/`
 const scrapeURL = `https://crawler-scrape.herokuapp.com/scrape/`

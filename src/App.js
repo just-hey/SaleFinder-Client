@@ -122,9 +122,8 @@ class App extends Component {
       })
   }
 
-  setUpState = async (profile, cart, products, isLoggedIn, searchValue=' ') => {
+  setUpState = async (profile, cart, products, isLoggedIn, searchValue='') => {
     if (searchValue) await this.filterProductList(products, searchValue)
-    console.log(cart);
     this.setState({ isLoggedIn, profile, cart, products, ready: true, value: searchValue })
   }
 
