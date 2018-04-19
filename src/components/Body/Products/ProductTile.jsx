@@ -33,10 +33,11 @@ class ProductTile extends Component {
             </div>
           </Card>
         </Transition>
-            )} else {
-              return ''
-            }
-
-}}
+      )
+    } else {
+      return ''
+    }
+  }
+}
 
 export default ProductTile

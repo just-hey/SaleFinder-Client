@@ -17,7 +17,6 @@ class Profile extends Component {
     return (
       <Transition  transitionOnMount animation='scale' duration={1000}>
         <Form centered className='userInfoForm profileContainer' onSubmit={requestUserProfileEdit}>
-
           <Form.Group widths='2'>
              <Form.Input label='Name' placeholder={ name } />
              <Form.Input label='Phone' placeholder={ phone } />
