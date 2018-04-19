@@ -4,7 +4,7 @@ import { Header, Modal, Icon } from 'semantic-ui-react'
 class Register extends Component {
   render() {
     return (
-      <Modal trigger={
+      <Modal centered trigger={
         <Icon.Group size='large'>
           <Icon name='info' inverted circular className='helpButtonIcon' size='small' link />
         </Icon.Group>

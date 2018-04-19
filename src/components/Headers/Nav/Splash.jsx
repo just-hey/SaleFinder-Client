@@ -3,6 +3,7 @@ import { Button, Form, Grid, Image, Header, Message, Segment, Modal, Tab, Transi
 import Login from './Login'
 import Register from './Register'
 import axios from 'axios'
+import InfoModal from './InfoModal'
 
 // const scrapeURL = `http://localhost:8002/scrape/`
 const scrapeURL = `https://crawler-scrape.herokuapp.com/scrape/`
@@ -29,7 +30,6 @@ class Splash extends Component {
     return (
       <Transition animation='fade'>
         <div className='login-form'>
-
           <style>{`
             body > div,
             body > div > div,
@@ -47,15 +47,15 @@ class Splash extends Component {
                 {' '}SaleFinder
               </Header>
               <Image size='small' centered src='/salefindericon.png' />
-              <Form size='large' onSubmit={this.handleSubmit}>
+              <Form size='large' onSubmit={ this.handleSubmit } >
                 <Segment stacked>
                   <Header as='h3' textAlign='center'>
                     Log in
                   </Header>
                   <Form.Input
                     name='phone'
-                    value={phone}
-                    onChange={this.handleChange}
+                    value={ phone }
+                    onChange={ this.handleChange }
                     fluid
                     icon='phone'
                     iconPosition='left'
@@ -64,8 +64,8 @@ class Splash extends Component {
                   />
                   <Form.Input
                     name='password'
-                    value={password}
-                    onChange={this.handleChange}
+                    value={ password }
+                    onChange={ this.handleChange }
                     fluid
                     icon='lock'
                     iconPosition='left'
@@ -84,7 +84,11 @@ class Splash extends Component {
                 </Segment>
               </Form>
               <Message>
-                Not a user? <Register register={ register } />
+                <InfoModal />
+                Not a user?
+                <Register
+                  register={ register }
+                />
               </Message>
             </Grid.Column>
           </Grid>
