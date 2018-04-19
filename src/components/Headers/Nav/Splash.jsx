@@ -44,9 +44,9 @@ class Splash extends Component {
           >
             <Grid.Column style={{ maxWidth: 450 }}>
               <Header as='h1' color='teal' textAlign='center'>
-                {/* <Image src='/salefinderlogo.png' /> */}
                 {' '}SaleFinder
               </Header>
+              <Image size='small' centered src='/salefindericon.png' />
               <Form size='large' onSubmit={this.handleSubmit}>
                 <Segment stacked>
                   <Header as='h3' textAlign='center'>
@@ -84,7 +84,7 @@ class Splash extends Component {
                 </Segment>
               </Form>
               <Message>
-                New to us? <Register register={ register } />
+                Not a user? <Register register={ register } />
               </Message>
             </Grid.Column>
           </Grid>
