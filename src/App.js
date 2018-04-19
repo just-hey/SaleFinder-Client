@@ -5,7 +5,6 @@ import axios from 'axios'
 
 // ---- Components ----
 import NavBar from './components/Headers/Nav/NavBar'
-import Banner from './components/Headers/Banner/Banner'
 import Cart from './components/Body/Cart/Cart'
 import ProductList from './components/Body/Products/ProductList'
 import Profile from './components/Body/Profile/Profile'

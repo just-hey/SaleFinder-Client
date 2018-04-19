@@ -31,7 +31,6 @@ class Login extends Component {
             >
               <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as='h2' textAlign='center'>
-
                   {' '}Log in
                 </Header>
                 <Form size='large' onSubmit={this.handleSubmit}>
