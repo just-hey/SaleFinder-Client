@@ -46,13 +46,11 @@ class Register extends Component {
         .catch(console.error)
     } else {
       this.setState({ resultMessage: message })
-      console.log('register fail message... ',message)
-      //meaning it was a fail, fade away error message and wait for another attempt.
     }
   }
 
   render() {
-    const { name, zip, phone, password } = this.state
+    const { name, zip, phone, password, resultMessage } = this.state
     const { register } = this.props
     return (
       <Modal trigger={ <a>Register</a> } basic size='large' closeIcon>
@@ -63,15 +61,15 @@ class Register extends Component {
               verticalAlign='middle'
             >
               <Grid.Column style={{ maxWidth: 450 }}>
-                <Form size='large' onSubmit={this.handleSubmit}>
+                <Form size='large' onSubmit={ this.handleSubmit }>
                   <Segment stacked>
                     <Header as='h3' textAlign='center'>
                       Register
                     </Header>
                       <Form.Input
                         name='name'
-                        value={name}
-                        onChange={this.handleChange}
+                        value={ name }
+                        onChange={ this.handleChange }
                         fluid
                         icon='user'
                         iconPosition='left'
@@ -80,8 +78,8 @@ class Register extends Component {
                       />
                       <Form.Input
                         name='zip'
-                        value={zip}
-                        onChange={this.handleChange}
+                        value={ zip }
+                        onChange={ this.handleChange }
                         fluid
                         icon='marker'
                         iconPosition='left'
@@ -90,8 +88,8 @@ class Register extends Component {
                       />
                       <Form.Input
                         name='phone'
-                        value={phone}
-                        onChange={this.handleChange}
+                        value={ phone }
+                        onChange={ this.handleChange }
                         fluid
                         icon='phone'
                         iconPosition='left'
@@ -100,8 +98,8 @@ class Register extends Component {
                       />
                       <Form.Input
                         name='password'
-                        value={password}
-                        onChange={this.handleChange}
+                        value={ password }
+                        onChange={ this.handleChange }
                         fluid
                         icon='lock'
                         iconPosition='left'
@@ -119,7 +117,7 @@ class Register extends Component {
                   </Segment>
                 </Form>
                 <Message.Header >
-                  {this.state.resultMessage}
+                  { resultMessage }
                 </Message.Header>
               </Grid.Column>
             </Grid>

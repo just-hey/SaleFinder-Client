@@ -165,9 +165,29 @@ class App extends Component {
       <Router>
         <div className='App container'>
           { this.state.isLoggedIn ? (
-            <NavBar isReady={ this.state.ready } products={ this.state.products } profile={ this.state.profile } cart={ this.state.cart } isLoggedIn={ this.state.isLoggedIn } viewProfile={ this.viewProfile } viewCart={ this.viewCart } viewHome={ this.viewHome } signOut={ this.signOut } setUpState={ this.setUpState } />) : (<Splash register={ this.registerNewUser } login={ this.attemptLogUserIn } />) }
+            <NavBar
+              isReady={ this.state.ready }
+              products={ this.state.products }
+              profile={ this.state.profile }
+              cart={ this.state.cart }
+              isLoggedIn={ this.state.isLoggedIn }
+              viewProfile={ this.viewProfile }
+              viewCart={ this.viewCart }
+              viewHome={ this.viewHome }
+              signOut={ this.signOut }
+              setUpState={ this.setUpState }
+            />
+          ) : (
+            <Splash
+              register={ this.registerNewUser }
+              login={ this.attemptLogUserIn }
+            />)
+          }
           <Switch>
-            <Route exact path='/' render={
+            <Route
+              exact
+              path='/'
+              render={
               (props) => <ProductList
                 { ...props }
                 isLoggedIn={ this.state.isLoggedIn }
@@ -176,12 +196,18 @@ class App extends Component {
                 user_id={ this.state.profile }
                 searchValue={ this.state.value }/>
               } />
-            <Route exact path='/cart' render={
+            <Route
+              exact
+              path='/cart'
+              render={
                 (props) => (<Cart
                   cartItems={ this.state.cart }
                   toggleInCart={ this.toggleInCart }/>)
               } />
-            <Route exact path='/profile' render={
+            <Route
+              exact
+              path='/profile'
+              render={
                 (props) => (<Profile
                   profile={this.state.profile}
                   requestUserProfileEdit={ this.requestUserProfileEdit }/>)
